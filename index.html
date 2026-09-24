@@ -1,17 +1,28 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="stylesheet" href="./src/style.css">
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>mundo-arbitraje</title>
+    <title>Mundo-Arbitraje</title>
   </head>
   <body>
-    <h1><strong>Mundo Arbitraje </strong></h1>
-    <form>
-      <input correo="correo" placeholder="ingresa tu correo electronico">
-      
+
+    <header>
+      <h1><strong>Proyecto Arbitros</strong></h1>
+    </header>
+    
+    <button id="boton_login" type="button"> Login </button>
+
+    <form id="formulario" style="display:none">
+    <h1> Iniciar sesion</h1>
+    <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario"><br>
+    <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña"><br>
+    <button id="boton_entrar" type="submit">Entrar</button><br>
+    <button type="submit">Crear cuenta</button>
     </form>
+    
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
