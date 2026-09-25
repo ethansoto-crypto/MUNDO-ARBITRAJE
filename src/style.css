@@ -103,3 +103,42 @@ body.pagina-principal nav{
     transition-duration: 0.4s;
     text-transform: uppercase;
 }
+#formulario_1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, rgb(107, 76, 114), rgb(230, 211, 195));
+    border-radius: 10px;
+    text-align: center;
+}
+
+#formulario_1 h1 {
+    text-align: center;
+}
+
+#formulario_1 input {
+    border-radius: 20px;
+    padding: 5px;
+    margin: 5px;
+    border-color: black;
+    border: 2px solid;
+}
+
+#formulario_1 button {
+    margin: 7px;
+    font-family: fantasy;
+    transition-duration: 0.4s;
+    text-transform: uppercase;
+    font-size: 20px;
+    border: 5px;
+    color: rgb(0, 0, 0);
+    background-color: white;
+
+}
+
+#formulario_1 button:hover {
+    background-color: black;
+    color: rgb(197, 169, 108);
+}
