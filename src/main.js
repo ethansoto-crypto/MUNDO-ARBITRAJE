@@ -2,9 +2,9 @@ const boton = document.querySelector('#boton_login')
 const formulario = document.querySelector('#formulario')
 const boton_entrar = document.querySelector('#boton_entrar')
 const boton_cuenta = document.querySelector('#boton_cuenta')
-const boton_registrar = document.querySelector('#registrar')
-const contraseña_1 = document.querySelector('#contraseña_1')
-const contraseña_2 = document.querySelector('#contraseña_2')
+const boton_contraseña = document.querySelector('#boton_contraseña')
+const recuperar_contraseña = document.querySelector('#correo_recuperacion')
+const boton_enviar = document.querySelector('#boton_enviar')
 
 boton.addEventListener("click", () =>{
     if(formulario.style.display == "none"){
@@ -25,8 +25,15 @@ boton_cuenta.addEventListener("click", (e)=>{
     window.location.href = './cuenta.html'
 })
 
-boton_registrar.addEventListener("click", (e)=>{
+boton_contraseña.addEventListener("click", (e)=>{
   e.preventDefault()
-  window.location.href = './principal.html'
+  if(recuperar_contraseña.style.display == "none"){
+        recuperar_contraseña.style.display = "block";
+        boton_enviar.style.display= "block";
+    }
+    else {
+        recuperar_contraseña.style.display = "none";
+        boton_enviar.style.display= "none";
+    }
 })
 

@@ -27,7 +27,7 @@ header{
 
 #formulario {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     width: 400px;
     transform: translate(-50%, -50%);
@@ -46,6 +46,22 @@ header{
     margin: 5px;
     border-color: black;
     border: 2px solid;
+}
+
+
+#formulario #correo_recuperacion{
+    display: block;
+    width: 60%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
+}
+
+#formulario #boton_enviar{
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: auto;
 }
 
 #formulario button {
