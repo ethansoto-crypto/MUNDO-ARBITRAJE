@@ -68,11 +68,11 @@ header{
 body {
     margin: 0;
     padding: 0;
-    background: rgb(104, 104, 104);
+    background: rgb(168, 188, 190);
     height: 100vh;
 }
 body.pagina-principal {
-    color:rgb(0, 0, 0);
+    background: rgb(168, 188, 190);
 }
 body.pagina-principal header{
     text-align: center;
