@@ -100,6 +100,32 @@ body.pagina-principal nav{
     width: 90%;
     margin:0 auto;
 }
+body.pagina-principal{
+
+  background-image: url('/src/fondo-pantalla.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100%;
+}
+body.pagina-principal section{
+color:#ffffff;
+background:rgba(15,23,42,0.85);
+padding: 16px;
+border: 2px solid;
+box-shadow:0 8px 20px rgba(0,0,0,0.5);
+width: 500px;
+}
+body.pagina-principal section h2{
+text-align: center;
+color:#f59e0b
+}
+body.pagina-principal section article  {
+color:60a5fa;
+font-size: 0.95rem ;
+}
+
+
 
 #Cronometro_parar {
     width: 10%;
