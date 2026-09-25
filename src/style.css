@@ -1,7 +1,7 @@
 #boton_login {
     width: 10%;
     position: absolute;
-    top: 20%;
+    top: 16%;
     left: 45%;
     background-color:white;
     color:rgb(0, 0, 0);
@@ -22,7 +22,7 @@ header{
 }
 #boton_login:hover {
     background-color:black;
-    color: red;
+    color: rgb(235, 180, 118);
 }
 
 #formulario {
@@ -31,7 +31,7 @@ header{
     left: 50%;
     width: 400px;
     transform: translate(-50%, -50%);
-    background: linear-gradient(150deg, purple, orange);
+    background: linear-gradient(135deg, rgb(107, 76, 114), rgb(230, 211, 195));
     border-radius: 10px;
     text-align: center;
 }
@@ -62,13 +62,13 @@ header{
 
 #formulario button:hover {
     background-color: black;
-    color: red;
+    color: rgb(197, 169, 108);
 }
 
 body {
     margin: 0;
     padding: 0;
-    background: linear-gradient(100deg, rgba(42, 173, 233, 0.747), rgb(104, 104, 104));
+    background: rgb(104, 104, 104);
     height: 100vh;
 }
 body.pagina-principal {
