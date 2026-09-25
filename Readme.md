@@ -8,7 +8,6 @@ Pasoa para ver la pagina web:
 Abrir codespace y abrir una terminal nueva para poner los siguientes comandos:
 
 - git pull
-- git merge main
 
 Asi ya habra copiado todos los archivos localmente, para iniciar la pagina de manera local debe poner en la terminal:
 
