@@ -153,6 +153,17 @@ font-size: 1.3rem ;
 margin-left: 20px;
 }
 
+body.pagina-principal aside{
+position:fixed;
+ right: 20px;
+top: 50%;
+color:#ffffff;
+background:rgba(15,23,42,0.85);
+padding: 16px;
+border: 2px solid;
+box-shadow:0 8px 20px rgba(0,0,0,0.5);
+width: 500px;
+}
 
 
 #Cronometro_parar {
