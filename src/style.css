@@ -114,6 +114,13 @@ body.pagina-principal{
   background-attachment: fixed;
   background-size: 100%;
 }
+body.pagina-principal main > article h1{
+    background-color: rgba(15,23,42,0.85);
+    padding:16px;
+    border-left: 5cqh solid#ef4444;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0.3)
+}
 body.pagina-principal section{
 color:#ffffff;
 background:rgba(15,23,42,0.85);
@@ -157,13 +164,13 @@ margin-left: 20px;
 body.pagina-principal aside{
 position:fixed;
 right: 20px;
-top: 28.5%;
+top: 52%;
 color:#ffffff;
 background:rgba(15,23,42,0.85);
 padding: 16px;
 border: 2px solid;
 box-shadow:0 8px 20px rgba(0,0,0,0.5);
-width: 800px;
+width: 300px;
 }
 
 
