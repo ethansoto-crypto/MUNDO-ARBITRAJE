@@ -84,7 +84,7 @@ header{
 body {
     margin: 0;
     padding: 0;
-    background-image: url('/src/fondo-pantalla.jpg');
+    background-image: url('/src/elementos-esenciales-baloncesto-3d_52683-117168.avif');
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -94,6 +94,7 @@ body.pagina-principal {
     margin: 0;
     padding: 0;
     background: rgb(168, 188, 190);
+
 }
 body.pagina-principal header{
     text-align: center;
@@ -107,7 +108,7 @@ body.pagina-principal nav{
 }
 body.pagina-principal{
 
-  background-image: url('/src/fondo-pantalla.jpg');
+  background-image: url('/src/elementos-esenciales-baloncesto-3d_52683-117168.avif');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -164,6 +165,7 @@ border: 2px solid;
 box-shadow:0 8px 20px rgba(0,0,0,0.5);
 width: 500px;
 }
+
 
 
 #Cronometro_parar {
@@ -227,9 +229,13 @@ width: 500px;
 body.pagina-cuenta{
     margin: 0;
     padding: 0;
-    background-image: url('/src/fondo-pantalla.jpg');
+    background-image: url('/src/elementos-esenciales-baloncesto-3d_52683-117168.avif');
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100%;
+}
+
+body.pagina-principal{
+    color:white;
 }
