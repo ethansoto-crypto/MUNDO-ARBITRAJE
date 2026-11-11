@@ -84,11 +84,12 @@ header{
 body {
     margin: 0;
     padding: 0;
-    background-image: url('/src/elementos-esenciales-baloncesto-3d_52683-117168.avif');
-    background-position: center;
+    background-image: url('/public/fondo-pantalla.jpg');
+    background-position: top center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: 100% auto;
+    
 }
 body.pagina-principal {
     margin: 0;
@@ -106,16 +107,16 @@ body.pagina-principal nav{
 }
 body.pagina-principal{
 
-  background-image: url('/src/elementos-esenciales-baloncesto-3d_52683-117168.avif');
+  background-image: url('/public/fondo-pantalla.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 100%;
+  background-size: cover;
 }
 body.pagina-principal main > article h1{
     background-color: rgba(15,23,42,0.85);
     padding:16px;
-    border-left: 5cqh solid#ef4444;
+    border-left: 5cqh solid #ef4444;
     border-radius: 6px;
     box-shadow: 0 4px 12px rgba(0,0,0.3)
 }
