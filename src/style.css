@@ -21,8 +21,8 @@ header{
     padding: 20px;
 }
 #boton_login:hover {
-    background-color:black;
-    color: rgb(235, 180, 118);
+    background-color:#e8631c;
+    color: #ffffff;
 }
 
 #formulario {
@@ -31,9 +31,12 @@ header{
     left: 50%;
     width: 400px;
     transform: translate(-50%, -50%);
-    background: linear-gradient(135deg, rgb(107, 76, 114), rgb(230, 211, 195));
-    border-radius: 10px;
+    background: linear-gradient(145deg, #111e38, #1c2d52);
+    border: 2px solid #e8631c;
+    border-radius: 16px;
     text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
 }
 
 #formulario h1 {
@@ -44,7 +47,6 @@ header{
     border-radius: 20px;
     padding: 5px;
     margin: 5px;
-    border-color: black;
     border: 2px solid;
 }
 
