@@ -1,20 +1,27 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <link rel="stylesheet" href="./src/style.css">
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mundo-Arbitraje</title>
+
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </head>
-  <body class ="pagina-principal">
+
+  <body class="bg-[url('/src/fondo-pantalla.jpg')] bg-[length:100%_auto] bg-top bg-no-repeat bg-slate-900 text-slate-100 min-h-screen flex flex-col font-sans">
+    
     <header>
       <h1><strong> MUNDO ARBITRAJE </strong></h1>
-      <p> Bienvenido a Mundo Arbitrje plataforma creada para Arbitros, Oficiales de mesa, Cronometristas,entre otros. 
-        Aqui encontraras articulos como Reglas FIBA actualizadas,Paginas de ayuda,Informaciones sobre los jugadores. 
+      <p> Bienvenido a Mundo Arbitraje plataforma creada para Arbitros, Oficiales de mesa, Cronometristas, entre otros. 
+        Aqui encontraras articulos como Reglas FIBA actualizadas, Paginas de ayuda, Informaciones sobre los jugadores. 
       </p>
       <button id="boton_iniciar_partido" type="button" class="boton-header">Iniciar Partido</button>
     </header>
+
     <nav>
       <a href="#">Arbitro</a>
       <a href="#">Oficiales de mesa</a>
@@ -22,7 +29,8 @@
       <a href="#">Hoja de planilla</a>
       <a href="#">Busqueda</a>
     </nav>
-     <main>
+
+    <main>
       <article>
         <h1>AVISOS: SE CANCELA EL PARTIDO DEL DIA JUEVES POR LLUVIA (Gimnasio no se encuentra en optimas condiciones)</h1>
       </article>
@@ -34,56 +42,56 @@
           <header><strong> Partido 2: UDP (Local) vs UC (Visita)</strong></header>
           <header><strong> Partido 3: USACH (Local) vs UCEM (Visita)</strong></header>
           <header><strong> Partido 4: USACH (Local) vs UC (Visita)</strong></header>
-          <span> 16:00 | Gimansio UDP </span>
+          <span> 16:00 | Gimnasio UDP </span>
 
           <footer>
-            <p>MC:Javier Urrutia</p>
-            <p>Cronometrista:Matias Nuñez</p>
-            <p>Arbitro:Braulio Muñoz</p>
+            <p>MC: Javier Urrutia</p>
+            <p>Cronometrista: Matias Nuñez</p>
+            <p>Arbitro: Braulio Muñoz</p>
           </footer>
         </article>
       </section>
 
       <aside>
         <details>
-            <summary>OBJETIVOS DEL CAMBIO</summary>
-            <p>
+          <summary>OBJETIVOS DEL CAMBIO</summary>
+          <p>
             <img src="src/1000051505.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
-            </p>
+          </p>
         </details>
         <details>
-            <summary>ACTO DE LANZAMIENTO</summary>
-            <p>
+          <summary>ACTO DE LANZAMIENTO</summary>
+          <p>
             <img src="src/1000051508.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
-            </p>
-          </details>
-          <details>
-            <summary>FALTA DISRUPTIVA</summary>
-            <p>
+          </p>
+        </details>
+        <details>
+          <summary>FALTA DISRUPTIVA</summary>
+          <p>
             <img src="src/1000051509.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
-            </p>
-          </details>
-          <details>
-            <summary>FALTA FLAGRANTE</summary>
-            <p>
+          </p>
+        </details>
+        <details>
+          <summary>FALTA FLAGRANTE</summary>
+          <p>
             <img src="src/1000051507.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
-            </p>
-          </details>
-          <details>
-            <summary>COMO SERAN LAS FALTAS EN LA PLANILLA</summary>
-            <p>
+          </p>
+        </details>
+        <details>
+          <summary>COMO SERAN LAS FALTAS EN LA PLANILLA</summary>
+          <p>
             <img src="src/1000051504.jpg" alt="" style="max-width: 100%; border-radius: 8px;">
-           </p>
-          </details>
-          <details>
-            <summary>FLOPPING</summary>
-           <p>
-             <img src="src/1000051511.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
-           </p>
-          </details>
-        </aside>
-      </main>
-    <script type="module" src="./src/principal.js"></script>  
-  </body>
+          </p>
+        </details>
+        <details>
+          <summary>FLOPPING</summary>
+          <p>
+            <img src="src/1000051511.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
+          </p>
+        </details>
+      </aside>
+    </main>
 
-  </html>
+    <script type="module" src="./src/principal.js"></script>  
+  </body> 
+</html>

@@ -88,13 +88,11 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: 100%;
+    background-size: cover;
 }
 body.pagina-principal {
     margin: 0;
     padding: 0;
-    background: rgb(168, 188, 190);
-
 }
 body.pagina-principal header{
     text-align: center;
@@ -141,7 +139,7 @@ display:flex;
 body.pagina-principal section article footer {
 font-family: Arial, Helvetica, sans-serif;
 text-align: justify;
-color:60a5fa;
+color: #60a5fa;
 font-size: 0.95rem ;
 margin-left: 30px;
 }
