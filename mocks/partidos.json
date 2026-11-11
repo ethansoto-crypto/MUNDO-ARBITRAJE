@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "local": "UDP",
+    "visita": "UCEM",
+    "fecha": "2026-11-12",
+    "hora": "16:00",
+    "lugar": "Gimnasio UDP",
+    "categoria": "Masculino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  },
+  {
+    "id": 2,
+    "local": "UDP",
+    "visita": "UC",
+    "fecha": "2026-11-12",
+    "hora": "17:30",
+    "lugar": "Gimnasio UDP",
+    "categoria": "Masculino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  },
+  {
+    "id": 3,
+    "local": "USACH",
+    "visita": "UCEM",
+    "fecha": "2026-11-13",
+    "hora": "19:00",
+    "lugar": "Gimnasio USACH",
+    "categoria": "Femenino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  },
+  {
+    "id": 4,
+    "local": "USACH",
+    "visita": "UC",
+    "fecha": "2026-11-13",
+    "hora": "20:30",
+    "lugar": "Gimnasio USACH",
+    "categoria": "Masculino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  },
+  {
+    "id": 5,
+    "local": "U. CHILE",
+    "visita": "PUC",
+    "fecha": "2026-11-14",
+    "hora": "15:00",
+    "lugar": "Gimnasio UDP",
+    "categoria": "Masculino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  },
+  {
+    "id": 6,
+    "local": "UNAB",
+    "visita": "UDP",
+    "fecha": "2026-11-14",
+    "hora": "16:30",
+    "lugar": "Gimnasio USACH",
+    "categoria": "Femenino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  },
+  {
+    "id": 7,
+    "local": "UTEM",
+    "visita": "UAI",
+    "fecha": "2026-11-15",
+    "hora": "11:00",
+    "lugar": "Gimnasio UDP",
+    "categoria": "Masculino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  },
+  {
+    "id": 8,
+    "local": "UCEM",
+    "visita": "U. CHILE",
+    "fecha": "2026-11-15",
+    "hora": "13:00",
+    "lugar": "Gimnasio USACH",
+    "categoria": "Femenino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  },
+  {
+    "id": 9,
+    "local": "PUC",
+    "visita": "USACH",
+    "fecha": "2026-11-16",
+    "hora": "18:00",
+    "lugar": "Gimnasio UDP",
+    "categoria": "Masculino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  },
+  {
+    "id": 10,
+    "local": "UAI",
+    "visita": "UNAB",
+    "fecha": "2026-11-16",
+    "hora": "19:30",
+    "lugar": "Gimnasio USACH",
+    "categoria": "Masculino",
+    "mc": "Javier Urrutia",
+    "cronometrista": "Ethan Soto",
+    "arbitro": "Giovanny Guerra"
+  }
+]
