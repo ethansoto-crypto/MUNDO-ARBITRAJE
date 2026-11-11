@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mundo-Arbitraje</title>
 
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/style.css" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -14,103 +14,154 @@
 
   <body class="pagina-principal text-slate-100 min-h-screen flex flex-col font-sans">
     
-    <header class="bg-slate-800 border-b border-slate-700/60 p-4 sm:p-6 ">
-      <h1 class="text-2xl md:text-4xl fond-black"><strong> MUNDO ARBITRAJE </strong></h1>
-      <p class="text-xs md:text-sm mx-auto my-2"> Bienvenido a Mundo Arbitraje plataforma creada para Cuerpos Arbitrales, Escuela de Arbitraje, Arbitros, Oficiales de mesa, Cronometristas, Planillero, entre otros.
-        Esta pagina brinda PDF para los distintos oficio del basketball, como Reglamento FIBA actualizado, Archivos de como hacer planilla tanto fisicas como digitales, Archivo para los Cronometristas.
-        Sube Programaciones de partidos que se daran con sus respectivos equipos (Entrenadores y Jugadores) locales y visitas, se agregara tambien nombre de las respectivas persona que iran a poner las reglas en la cancha 
-
+    
+    <header class="bg-slate-900/80 backdrop-blur border-b border-slate-700/60 p-4 sm:p-6 text-center">
+      <h1 class="text-2xl md:text-4xl font-black text-sky-400">
+        <strong> MUNDO ARBITRAJE </strong>
+      </h1>
+      <p class="text-xs md:text-sm text-slate-300 max-w-3xl mx-auto my-2">
+        Bienvenido a Mundo Arbitraje, plataforma creada para Cuerpos Arbitrales, Escuela de Arbitraje, Árbitros, Oficiales de mesa, Cronometristas, Planilleros, entre otros.
+        Esta página brinda archivos PDF para los distintos oficios del baloncesto, como Reglamento FIBA actualizado, guías de llenado de planillas físicas y digitales, y utilidades para cronometristas.
       </p>
-     
     </header>
 
-    <nav>
-      <a href="#">Arbitro</a>
-      <a href="#">Oficiales de mesa</a>
-      <a href="#">Cronometrista</a>
-      <a href="#">Hoja de planilla</a>
-      <a href="#">Busqueda</a>
+    
+    <nav class="bg-slate-800/90 backdrop-blur p-3 flex justify-center gap-6 text-sm font-medium border-b border-slate-700">
+      <a href="#" class="hover:text-sky-400 transition">Árbitro</a>
+      <a href="#" class="hover:text-sky-400 transition">Oficiales de mesa</a>
+      <a href="#" class="hover:text-sky-400 transition">Cronometrista</a>
+      <a href="#" class="hover:text-sky-400 transition">Hoja de planilla</a>
+      <a href="#" class="hover:text-sky-400 transition">Búsqueda</a>
     </nav>
 
-    <main>
-      <article>
-        <h1>AVISOS: SE CANCELA EL PARTIDO DEL DIA JUEVES POR LLUVIA (Gimnasio no se encuentra en optimas condiciones)</h1>
-      </article>
-
-      <section>
-        <h2><strong>ASIGNACIONES Y PARTIDOS</strong></h2>
-        <article> 
-          <header class="font-bold text-sm md:text-base">
-            <strong> Partido 1: UDP (Local) vs UCEM (Visita)</strong>
-          </header>
-
-          <button id="boton_iniciar_partido" type="button" class="boton-header">Iniciar Partido</button>
-
-          <header class="font-bold text-sm md:text-base">
-            <strong> Partido 2: UDP (Local) vs UC (Visita)</strong>
-          </header>
-          <button id="boton_iniciar_partido" type="button" class="boton-header">Iniciar Partido</button>
-
-          <header class="font-bold text-sm md:text-base">
-            <strong> Partido 3: USACH (Local) vs UCEM (Visita)</strong>
-          </header>
-          <button id="boton_iniciar_partido" type="button" class="boton-header">Iniciar Partido</button>
-
-          <header class="font-bold text-sm md:text-base">
-            <strong> Partido 4: USACH (Local) vs UC (Visita)</strong>
-          </header>
-          <button id="boton_iniciar_partido" type="button" class="boton-header">Iniciar Partido</button>
-
-          <span> 16:00 | Gimnasio UDP </span>
-
-          <footer>
-            <p>MC: Javier Urrutia</p>
-            <p>Cronometrista: Matias Nuñez</p>
-            <p>Arbitro: Braulio Muñoz</p>
-          </footer>
+   
+    <main class="max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 md:grid-cols-3 gap-6 flex-1">
+      
+     
+      <div class="md:col-span-2 space-y-6">
+        
+        <article class="bg-rose-950/80 backdrop-blur border border-rose-800/70 p-4 rounded-xl shadow-lg">
+          <h1 class="font-bold text-rose-300 text-sm md:text-base">
+            AVISOS: SE CANCELA EL PARTIDO DEL DIA JUEVES POR LLUVIA (Gimnasio no se encuentra en óptimas condiciones)
+          </h1>
         </article>
-      </section>
 
-      <aside>
-        <details>
-          <summary>OBJETIVOS DEL CAMBIO</summary>
-          <p>
-            <img src="src/1000051505.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
+        <section class="bg-slate-900/80 backdrop-blur border border-slate-700/70 p-5 rounded-xl shadow-lg space-y-4">
+          <h2 class="text-xl font-bold text-amber-400 border-b border-slate-700 pb-2 text-center md:text-left">
+            <strong>ASIGNACIONES Y PARTIDOS</strong>
+          </h2>
+          
+          <div class="space-y-3">
+           
+            <article class="bg-slate-800/70 border border-slate-700/80 p-3 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3"> 
+              <header class="font-bold text-slate-100 text-sm md:text-base">
+                Partido 1: UDP (Local) vs UCEM (Visita)
+              </header>
+              <div class="flex items-center gap-3">
+                <span class="bg-sky-950 text-sky-300 text-xs px-2.5 py-1 rounded border border-sky-800">16:00 | Gimnasio UDP</span>
+                <a href="./iniciar-partido.html" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs md:text-sm px-3 py-1.5 rounded transition duration-200">
+                  Iniciar Partido
+                </button>
+              </div>
+            </article>
+
+            
+            <article class="bg-slate-800/70 border border-slate-700/80 p-3 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3"> 
+              <header class="font-bold text-slate-100 text-sm md:text-base">
+                Partido 2: UDP (Local) vs UC (Visita)
+              </header>
+              <div class="flex items-center gap-3">
+                <span class="bg-sky-950 text-sky-300 text-xs px-2.5 py-1 rounded border border-sky-800">17:30 | Gimnasio UDP</span>
+                <a href="./iniciar_partido.html" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs md:text-sm px-3 py-1.5 rounded transition duration-200">
+                  Iniciar Partido
+                </button>
+              </div>
+            </article>
+
+           
+            <article class="bg-slate-800/70 border border-slate-700/80 p-3 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3"> 
+              <header class="font-bold text-slate-100 text-sm md:text-base">
+                Partido 3: USACH (Local) vs UCEM (Visita)
+              </header>
+              <div class="flex items-center gap-3">
+                <span class="bg-sky-950 text-sky-300 text-xs px-2.5 py-1 rounded border border-sky-800">15:00 | Gimnasio USACH</span>
+                <a href="./iniciar_partido.html" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs md:text-sm px-3 py-1.5 rounded transition duration-200">
+                  Iniciar Partido
+                </button>
+              </div>
+            </article>
+
+            
+            <article class="bg-slate-800/70 border border-slate-700/80 p-3 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-3"> 
+              <header class="font-bold text-slate-100 text-sm md:text-base">
+                Partido 4: USACH (Local) vs UC (Visita)
+              </header>
+              <div class="flex items-center gap-3">
+                <span class="bg-sky-950 text-sky-300 text-xs px-2.5 py-1 rounded border border-sky-800">16:30 | Gimnasio USACH</span>
+                <a href="./iniciar_partido.html" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold text-xs md:text-sm px-3 py-1.5 rounded transition duration-200">
+                  Iniciar Partido
+                </button>
+              </div>
+            </article>
+          </div>
+
+          
+          <footer class="pt-3 border-t border-slate-700/80 text-slate-300 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs md:text-sm bg-slate-950/40 p-3 rounded-lg">
+            <p><strong class="text-sky-400">MC:</strong> Javier Urrutia</p>
+            <p><strong class="text-sky-400">Cronometrista:</strong> Matias Nuñez</p>
+            <p><strong class="text-sky-400">Árbitro:</strong> Braulio Muñoz</p>
+          </footer>
+        </section>
+      </div>
+
+      
+      <aside class="bg-slate-900/80 backdrop-blur border border-slate-700/70 p-4 rounded-xl space-y-3 h-fit">
+        <h3 class="text-base font-bold text-slate-200 border-b border-slate-700 pb-2">REGLAMENTO FIBA</h3>
+
+        <details class="bg-slate-800/70 p-3 rounded-lg border border-slate-700">
+          <summary class="cursor-pointer font-semibold text-sm hover:text-sky-400">OBJETIVOS DEL CAMBIO</summary>
+          <p class="mt-2 flex justify-center">
+            <img src="./src/1000051505.jpg" alt="" class="rounded-lg max-w-full border border-slate-700">
           </p>
         </details>
-        <details>
-          <summary>ACTO DE LANZAMIENTO</summary>
-          <p>
-            <img src="src/1000051508.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
+        
+        <details class="bg-slate-800/70 p-3 rounded-lg border border-slate-700">
+          <summary class="cursor-pointer font-semibold text-sm hover:text-sky-400">ACTO DE LANZAMIENTO</summary>
+          <p class="mt-2 flex justify-center">
+            <img src="./src/1000051508.jpg" alt="" class="rounded-lg max-w-full border border-slate-700">
           </p>
         </details>
-        <details>
-          <summary>FALTA DISRUPTIVA</summary>
-          <p>
-            <img src="src/1000051509.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
+        
+        <details class="bg-slate-800/70 p-3 rounded-lg border border-slate-700">
+          <summary class="cursor-pointer font-semibold text-sm hover:text-sky-400">FALTA DISRUPTIVA</summary>
+          <p class="mt-2 flex justify-center">
+            <img src="./src/1000051509.jpg" alt="" class="rounded-lg max-w-full border border-slate-700">
           </p>
         </details>
-        <details>
-          <summary>FALTA FLAGRANTE</summary>
-          <p>
-            <img src="src/1000051507.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
+
+        <details class="bg-slate-800/70 p-3 rounded-lg border border-slate-700">
+          <summary class="cursor-pointer font-semibold text-sm hover:text-sky-400">FALTA FLAGRANTE</summary>
+          <p class="mt-2 flex justify-center">
+            <img src="./src/1000051507.jpg" alt="" class="rounded-lg max-w-full border border-slate-700">
           </p>
         </details>
-        <details>
-          <summary>COMO SERAN LAS FALTAS EN LA PLANILLA</summary>
-          <p>
-            <img src="src/1000051504.jpg" alt="" style="max-width: 100%; border-radius: 8px;">
+
+        <details class="bg-slate-800/70 p-3 rounded-lg border border-slate-700">
+          <summary class="cursor-pointer font-semibold text-sm hover:text-sky-400">CÓMO SERÁN LAS FALTAS EN LA PLANILLA</summary>
+          <p class="mt-2 flex justify-center">
+            <img src="./src/1000051504.jpg" alt="" class="rounded-lg max-w-full border border-slate-700">
           </p>
         </details>
-        <details>
-          <summary>FLOPPING</summary>
-          <p>
-            <img src="src/1000051511.jpg" alt="" style="max-width: 70%; border-radius: 8px;">
+
+        <details class="bg-slate-800/70 p-3 rounded-lg border border-slate-700">
+          <summary class="cursor-pointer font-semibold text-sm hover:text-sky-400">FLOPPING</summary>
+          <p class="mt-2 flex justify-center">
+            <img src="./src/1000051511.jpg" alt="" class="rounded-lg max-w-full border border-slate-700">
           </p>
         </details>
       </aside>
     </main>
 
-    <script type="module" src="./src/principal.js"></script>  
+    <script type="module" src="./src/principal.js"></script>   
   </body> 
 </html>
