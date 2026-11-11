@@ -36,4 +36,3 @@ boton_contraseña.addEventListener("click", (e)=>{
         boton_enviar.style.display= "none";
     }
 })
-
