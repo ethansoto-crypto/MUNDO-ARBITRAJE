@@ -1,0 +1,23 @@
+[
+    {
+     "id": 1,
+     "usuario": "Javier_urrutia23",
+     "clave": "12345678",
+     "nombre": "Javier Urrutia",
+     "rol": "mc"
+    },
+    {
+     "id": 2,
+     "usuario": "Giovanny_Guerra4",
+     "clave": "G1234567",
+     "nombre": "Giovanny Guerra",
+     "rol": "arbitro"
+    },
+    {
+     "id": 3,
+     "usuario": "Ethan_Soto8",
+     "clave": "Ethan1234",
+     "nombre": "Ethan Soto",
+     "rol": "cronometrista"
+    }
+]

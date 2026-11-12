@@ -5,204 +5,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planilla de Equipos - Mundo Arbitraje</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="/src/Jugadore.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="Jugadores text-slate-100 min-h-screen flex flex-col font-sans bg-cover bg-center bg-fixed bg-no-repeat"
-      style="background-image: linear-gradient(rgba(11, 20, 38, 0.78), rgba(11, 20, 38, 0.88)), url('/public/MUNDO_ARBITRAL.jpg');">
+      style="background-image: linear-gradient(rgba(11, 20, 38, 0.78), rgba(11, 20, 38, 0.88)), url('/MUNDO_ARBITRAL.jpg');"
+      x-data="planillaEquipos">
+    
+    <div x-show="cargando" class="my-auto text-center">
+        <div class="inline-block w-10 h-10 border-4 border-[#e8631c] border-t-transparent rounded-full animate-spin mb-3"></div>
+        <p class="text-lg font-bold text-slate-200">Cargando Planilla ...</p>
+    </div>
 
-    <!-- Contenedor Principal Totalmente Responsivo -->
-    <!-- 1 columna en móviles, 2 columnas desde tablets (md), separación amplia en monitores (xl) para lucir el logo -->
-    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-24 items-start my-auto">
+    <div x-show="error && !cargando" class="my-auto max-w-md mx-auto bg-red-950/90 border-2 border-red-500 p-6 rounded-xl text-center space-y-4">
+        <p class="text-red-200 font-semibold" x-text="error"></p>
+        <button @click="cargarDatos(false)" type="button"
+                class="px-5 py-2 bg-[#e8631c] hover:bg-[#ff7529] rounded-lg font-bold text-white transition">
+            Reintentar carga
+        </button>
+    </div>
 
-        <!-- ================= COLUMNA IZQUIERDA (LOCAL) ================= -->
+    <div x-show="!cargando && !error" x-transition
+         class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-24 items-start my-auto">
+
+        
         <div class="flex flex-col gap-3 sm:gap-4 w-full">
             
-            <!-- 1. Nombre de Equipo (Local) -->
+            
             <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 sm:p-4 shadow-lg">
-                <label class="block text-xs font-bold uppercase tracking-wider text-[#e8631c] mb-1">
+                <label for="equipo-local" class="block text-xs font-bold uppercase tracking-wider text-[#e8631c] mb-1">
                     Local
                 </label>
-                <input type="text" placeholder="Nombre de Equipo" 
+                <input id="equipo-local" type="text" x-model="local.nombre" placeholder="Nombre de Equipo" 
                        class="w-full bg-[#0b1426]/90 border border-[#e8631c]/60 focus:border-[#e8631c] rounded-lg px-3 py-2 text-base sm:text-lg font-bold text-white placeholder-gray-400 outline-none transition">
             </div>
 
-            <!-- 2. Entrenador (Local) -->
+            
             <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 shadow-lg">
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
-                    <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#e8631c] whitespace-nowrap">
+                    <label for="entrenador-local" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#e8631c] whitespace-nowrap">
                         Entrenador:
-                    </span>
-                    <input type="text" placeholder="Nombre del entrenador" 
+                    </label>
+                    <input id="entrenador-local" type="text" x-model="local.entrenador" placeholder="Nombre del entrenador" 
                            class="w-full bg-[#0b1426]/90 border border-[#e8631c]/60 focus:border-[#e8631c] rounded-lg px-3 py-1.5 text-sm text-white placeholder-gray-400 outline-none transition">
                 </div>
             </div>
 
-            <!-- 3. Jugadores (Local) -->
+            
             <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 sm:p-4 shadow-lg flex flex-col gap-3">
                 <div class="flex justify-between items-center border-b border-[#e8631c]/40 pb-2">
                     <h2 class="text-sm sm:text-base font-extrabold uppercase tracking-wider text-[#e8631c]">
-                        Jugadores
+                        Jugadores (<span x-text="local.jugadores.length"></span>)
                     </h2>
-                    <div class="flex gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-bold text-gray-300 pr-1">
+                    <div class="flex gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-bold text-gray-300 pr-6">
                         <span title="En cancha / Titular">Titular</span>
                         <span title="Habilitado">Hab.</span>
                     </div>
                 </div>
 
-                <!-- Lista desplegada en móviles, con scroll interno desde tablets (md) -->
+                
                 <div class="flex flex-col gap-2 md:max-h-[400px] md:overflow-y-auto pr-1">
-                    <!-- Fila Jugador 1 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                    <template x-for="jugador in local.jugadores" :key="jugador.id">
+                        <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                            <input type="text" x-model="jugador.numero" placeholder="N°" aria-label="Número de camiseta"
+                                   class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                            <input type="text" x-model="jugador.nombre" placeholder="Nombre del jugador" aria-label="Nombre del jugador"
+                                   class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                            <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                                <input type="checkbox" x-model="jugador.titular" aria-label="Titular" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                                <input type="checkbox" x-model="jugador.habilitado" aria-label="Habilitado" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                                <button @click="eliminarJugador('local', jugador.id)" type="button" title="Eliminar jugador"
+                                        class="text-red-400 hover:text-red-300 font-bold text-xs px-1">✕</button>
+                            </div>
                         </div>
-                    </div>
+                    </template>
 
-                    <!-- Fila Jugador 2 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                        </div>
-                    </div>
-
-                    <!-- Fila Jugador 3 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                        </div>
-                    </div>
-
-                    <!-- Fila Jugador 4 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                        </div>
-                    </div>
-
-                    <!-- Fila Jugador 5 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                        </div>
-                    </div>
+                    
+                    <p x-show="local.jugadores.length === 0" class="text-center text-xs text-slate-400 py-4">
+                        No hay jugadores registrados en el equipo local.
+                    </p>
                 </div>
+
+                <button @click="agregarJugador('local')" type="button"
+                        class="text-xs font-bold text-[#e8631c] hover:underline self-start">
+                    + Agregar jugador local
+                </button>
             </div>
         </div>
 
 
-        <!-- ================= COLUMNA DERECHA (VISITA) ================= -->
+        
         <div class="flex flex-col gap-3 sm:gap-4 w-full">
             
-            <!-- 1. Visita / Nombre de Equipo -->
+            
             <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 sm:p-4 shadow-lg">
-                <label class="block text-xs font-bold uppercase tracking-wider text-[#e8631c] mb-1">
+                <label for="equipo-visita" class="block text-xs font-bold uppercase tracking-wider text-[#e8631c] mb-1">
                     Visita
                 </label>
-                <input type="text" placeholder="Nombre de Equipo" 
+                <input id="equipo-visita" type="text" x-model="visita.nombre" placeholder="Nombre de Equipo" 
                        class="w-full bg-[#0b1426]/90 border border-[#e8631c]/60 focus:border-[#e8631c] rounded-lg px-3 py-2 text-base sm:text-lg font-bold text-white placeholder-gray-400 outline-none transition">
             </div>
 
-            <!-- 2. Entrenador (Visita) -->
+            
             <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 shadow-lg">
                 <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
-                    <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#e8631c] whitespace-nowrap">
+                    <label for="entrenador-visita" class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#e8631c] whitespace-nowrap">
                         Entrenador:
-                    </span>
-                    <input type="text" placeholder="Nombre del entrenador" 
+                    </label>
+                    <input id="entrenador-visita" type="text" x-model="visita.entrenador" placeholder="Nombre del entrenador" 
                            class="w-full bg-[#0b1426]/90 border border-[#e8631c]/60 focus:border-[#e8631c] rounded-lg px-3 py-1.5 text-sm text-white placeholder-gray-400 outline-none transition">
                 </div>
             </div>
 
-            <!-- 3. Jugadores (Visita) -->
+            
             <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 sm:p-4 shadow-lg flex flex-col gap-3">
                 <div class="flex justify-between items-center border-b border-[#e8631c]/40 pb-2">
                     <h2 class="text-sm sm:text-base font-extrabold uppercase tracking-wider text-[#e8631c]">
-                        Jugadores
+                        Jugadores (<span x-text="visita.jugadores.length"></span>)
                     </h2>
-                    <div class="flex gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-bold text-gray-300 pr-1">
+                    <div class="flex gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-bold text-gray-300 pr-6">
                         <span title="En cancha / Titular">Titular</span>
                         <span title="Habilitado">Hab.</span>
                     </div>
                 </div>
 
-                <!-- Lista desplegada en móviles, con scroll interno desde tablets (md) -->
+                
                 <div class="flex flex-col gap-2 md:max-h-[400px] md:overflow-y-auto pr-1">
-                    <!-- Fila Jugador 1 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                    <template x-for="jugador in visita.jugadores" :key="jugador.id">
+                        <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                            <input type="text" x-model="jugador.numero" placeholder="N°" aria-label="Número de camiseta"
+                                   class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                            <input type="text" x-model="jugador.nombre" placeholder="Nombre del jugador" aria-label="Nombre del jugador"
+                                   class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                            <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                                <input type="checkbox" x-model="jugador.titular" aria-label="Titular" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                                <input type="checkbox" x-model="jugador.habilitado" aria-label="Habilitado" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                                <button @click="eliminarJugador('visita', jugador.id)" type="button" title="Eliminar jugador"
+                                        class="text-red-400 hover:text-red-300 font-bold text-xs px-1">✕</button>
+                            </div>
                         </div>
-                    </div>
+                    </template>
 
-                    <!-- Fila Jugador 2 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                        </div>
-                    </div>
-
-                    <!-- Fila Jugador 3 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                        </div>
-                    </div>
-
-                    <!-- Fila Jugador 4 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                        </div>
-                    </div>
-
-                    <!-- Fila Jugador 5 -->
-                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
-                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
-                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
-                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
-                        </div>
-                    </div>
+                    <p x-show="visita.jugadores.length === 0" class="text-center text-xs text-slate-400 py-4">
+                        No hay jugadores registrados en el equipo visita.
+                    </p>
                 </div>
+
+                <button @click="agregarJugador('visita')" type="button"
+                        class="text-xs font-bold text-[#e8631c] hover:underline self-start">
+                    + Agregar jugador visita
+                </button>
             </div>
         </div>
 
-        <div class="md:col-span-2 flex justify-center mt-2 sm:mt-4">
-           
-                <a href="./Iniciar_partido.html"  class="bg-[#e8631c] hover:bg-[#ff7529] text-white font-extrabold uppercase tracking-wider px-8 py-3.5 rounded-xl border-2 border-white/20 shadow-lg shadow-[#e8631c]/30 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer text-sm sm:text-base">
-                Iniciar Partido
-                </a>
-        </div>
+        
+        <div class="md:col-span-2 flex flex-col items-center gap-2 mt-2 sm:mt-4">
+            <button @click="iniciarPartido" :disabled="guardando" type="button"
+                    class="bg-[#e8631c] hover:bg-[#ff7529] disabled:opacity-50 text-white font-extrabold uppercase tracking-wider px-8 py-3.5 rounded-xl border-2 border-white/20 shadow-lg shadow-[#e8631c]/30 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer text-sm sm:text-base">
+                <span x-show="!guardando">Iniciar Partido</span>
+                <span x-show="guardando">Guardando planilla...</span>
+            </button>
 
+            
+            <button @click="cargarDatos(true)" type="button" class="text-[11px] text-slate-400 hover:text-slate-200 underline">
+                Simular error de carga
+            </button>
+        </div>
 
     </div>
 
+    
 </body>
 </html>
