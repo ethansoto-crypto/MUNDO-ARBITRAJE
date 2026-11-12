@@ -93,6 +93,7 @@ Respuesta 1:
 </html>
 
 (Finalmente movi los botones a la izq y der de equipo local y visita, al igual que centre mas las cosas)
+--------------------------------------------------------------------------------------------------------
 # Problema de error de archivo cuenta para hacer el commit
 - **Fecha:** 2026-11-12
 - **Integrante:** Javier Urrutia (@javiurrutialara)
@@ -109,11 +110,13 @@ git add src/Cuenta1.js src/Main.js src/Principal.js src/Style.css Cuenta.html In
 ## Verificación
 - Funciono y me dejo hacer el commit 
 - Fue solo por no tener atencion con letras que ponia :(
-
+---------------------------------------------------------------------------------------------------------
 12-11-2026
 Ethan Soto
 Gemini
-Iniciar_partido.html
+Jugadores.html; 
+
+Commit : Correcciones en Jugadores.html, Avance en Api.js, Jugadore.js, Main.js[IA]
 
 pront 1: La pagina de Jugadores.html me sale vacia y sin nada donde estara el error?.
 Respuesta: El problema está en las líneas 8 y 9 dentro del <head> de Jugadores.html.
@@ -126,3 +129,48 @@ HTML
 </body>
 </html>
 Con ese cambio, Jugadore.js registra planillaEquipos primero y luego Alpine renderiza la tabla completa con ambos equipos y sus jugadores.
+
+pront 2: que me falta agregar en el main.js para que compile ?
+
+respuesta:
+Para que src/Main.js compile sin errores de sintaxis y conecte correctamente los eventos de la vista index.html con la validación de Api.js, debes asegurarte de usar import en minúscula y agregar los manejadores de eventos para el despliegue del formulario, el envío de credenciales y la navegación:
+import { iniciarSesion } from './Api.js';
+
+const botonLogin = document.querySelector('#boton_login');
+const formulario = document.querySelector('#formulario');
+const botonCuenta = document.querySelector('#boton_cuenta');
+const botonRecuperar = document.querySelector('#boton_contraseña');
+const inputCorreo = document.querySelector('#correo_recuperacion');
+const botonEnviar = document.querySelector('#boton_enviar');
+
+botonLogin.addEventListener('click', () => {
+  formulario.style.display = formulario.style.display === 'none' ? 'block' : 'none';
+});
+
+botonCuenta.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.location.href = './Cuenta.html';
+});
+
+botonRecuperar.addEventListener('click', () => {
+  inputCorreo.style.display = 'inline-block';
+  botonEnviar.style.display = 'inline-block';
+});
+
+formulario.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const usuario = document.querySelector('#usuario').value.trim();
+  const clave = document.querySelector('#contraseña').value.trim();
+
+  if (!usuario || !clave) {
+    alert('Completa usuario y contraseña');
+    return;
+  }
+
+  const respuesta = await iniciarSesion(usuario, clave);
+  if (respuesta.ok) {
+    window.location.href = './Principal.html';
+  } else {
+    alert(respuesta.error);
+  }
+});
