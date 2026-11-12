@@ -17,12 +17,12 @@ boton.addEventListener("click", () =>{
 
 boton_entrar.addEventListener("click", (e)=>{
   e.preventDefault()
-  window.location.href = './principal.html'
+  window.location.href = './Principal.html'
 })
 
 boton_cuenta.addEventListener("click", (e)=>{
     e.preventDefault()
-    window.location.href = './cuenta.html'
+    window.location.href = './Cuenta.html'
 })
 
 boton_contraseña.addEventListener("click", (e)=>{

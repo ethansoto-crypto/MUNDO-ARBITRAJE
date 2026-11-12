@@ -6,7 +6,7 @@ const contraseña_2 = document.querySelector('#contraseña_2')
 boton_registrar.addEventListener("click", (e)=>{
   e.preventDefault()
   if(contraseña_1.value == contraseña_2.value){
-    window.location.href = './principal.html';
+    window.location.href = './Principal.html';
   }else{
     alert("Contraseñas diferentes");
   }
