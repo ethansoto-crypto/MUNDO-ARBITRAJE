@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+ <head>
+    <link rel="stylesheet" href="./src/style.css">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <title>Mundo-Arbitraje</title>
+  </head>
+  <body class="cuenta text-slate-100 min-h-screen flex flex-col font-sans">
+
+    <form id="formulario_1">
+    <h1> Crear cuenta</h1>
+    <input type="text" id="usuario_1" name="usuario_1" placeholder="Nombre de usuario"><br>
+    <input type="password" id="contraseña_1" name="contraseña_1" placeholder="Contraseña"><br>
+    <input type="password" id="contraseña_2" name="contraseña_2" placeholder="Confirmar contraseña"><br>
+    <input type="text" id="correo" name="correo" placeholder="Correo"><br>
+    <input type="text" id="telefono" name="telefono" placeholder="Telefono (Opcional)"><br>
+    <button id="registrar" type="button">Registar</button>
+    </form>
+
+
+
+    <script type="module" src="/src/cuenta.js"></script>
+  </body>
+</html>

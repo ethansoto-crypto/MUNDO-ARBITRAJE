@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./src/style.css">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <title>Mundo-Arbitraje</title>
+  </head>
+  <body>
+
+    <header class="">
+      <h1 class="text-2xl md:text-4xl font-black text-slate-100 ">
+        Proyecto Arbitros</h1>
+    </header>
+    
+    <button id="boton_login" type="button"> Login </button>
+
+    <form id="formulario" style="display:none">
+    <h1> Iniciar sesion</h1>
+    <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario"><br>
+    <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña"><br>
+    <button id="boton_entrar" type="submit">Entrar</button>
+    <button id="boton_cuenta" type="submit">Crear cuenta</button><br>
+    <button id="boton_contraseña" type="button"> Recuperar contraseña</button><br>
+    <input type="text" id="correo_recuperacion" name="correo" style="display:none" placeholder="Correo para recuperar contraseña">
+    <button id="boton_enviar" type="button" style="display:none"> Enviar correo</button>
+    </form>
+    
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
