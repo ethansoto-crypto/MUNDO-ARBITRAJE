@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilla de Equipos - Mundo Arbitraje</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="Jugadores text-slate-100 min-h-screen flex flex-col font-sans bg-cover bg-center bg-fixed bg-no-repeat"
+      style="background-image: linear-gradient(rgba(11, 20, 38, 0.78), rgba(11, 20, 38, 0.88)), url('/public/MUNDO_ARBITRAL.jpg');">
+
+    <!-- Contenedor Principal Totalmente Responsivo -->
+    <!-- 1 columna en móviles, 2 columnas desde tablets (md), separación amplia en monitores (xl) para lucir el logo -->
+    <div class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-24 items-start my-auto">
+
+        <!-- ================= COLUMNA IZQUIERDA (LOCAL) ================= -->
+        <div class="flex flex-col gap-3 sm:gap-4 w-full">
+            
+            <!-- 1. Nombre de Equipo (Local) -->
+            <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 sm:p-4 shadow-lg">
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#e8631c] mb-1">
+                    Local
+                </label>
+                <input type="text" placeholder="Nombre de Equipo" 
+                       class="w-full bg-[#0b1426]/90 border border-[#e8631c]/60 focus:border-[#e8631c] rounded-lg px-3 py-2 text-base sm:text-lg font-bold text-white placeholder-gray-400 outline-none transition">
+            </div>
+
+            <!-- 2. Entrenador (Local) -->
+            <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 shadow-lg">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+                    <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#e8631c] whitespace-nowrap">
+                        Entrenador:
+                    </span>
+                    <input type="text" placeholder="Nombre del entrenador" 
+                           class="w-full bg-[#0b1426]/90 border border-[#e8631c]/60 focus:border-[#e8631c] rounded-lg px-3 py-1.5 text-sm text-white placeholder-gray-400 outline-none transition">
+                </div>
+            </div>
+
+            <!-- 3. Jugadores (Local) -->
+            <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 sm:p-4 shadow-lg flex flex-col gap-3">
+                <div class="flex justify-between items-center border-b border-[#e8631c]/40 pb-2">
+                    <h2 class="text-sm sm:text-base font-extrabold uppercase tracking-wider text-[#e8631c]">
+                        Jugadores
+                    </h2>
+                    <div class="flex gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-bold text-gray-300 pr-1">
+                        <span title="En cancha / Titular">Titular</span>
+                        <span title="Habilitado">Hab.</span>
+                    </div>
+                </div>
+
+                <!-- Lista desplegada en móviles, con scroll interno desde tablets (md) -->
+                <div class="flex flex-col gap-2 md:max-h-[400px] md:overflow-y-auto pr-1">
+                    <!-- Fila Jugador 1 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Fila Jugador 2 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Fila Jugador 3 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Fila Jugador 4 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Fila Jugador 5 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ================= COLUMNA DERECHA (VISITA) ================= -->
+        <div class="flex flex-col gap-3 sm:gap-4 w-full">
+            
+            <!-- 1. Visita / Nombre de Equipo -->
+            <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 sm:p-4 shadow-lg">
+                <label class="block text-xs font-bold uppercase tracking-wider text-[#e8631c] mb-1">
+                    Visita
+                </label>
+                <input type="text" placeholder="Nombre de Equipo" 
+                       class="w-full bg-[#0b1426]/90 border border-[#e8631c]/60 focus:border-[#e8631c] rounded-lg px-3 py-2 text-base sm:text-lg font-bold text-white placeholder-gray-400 outline-none transition">
+            </div>
+
+            <!-- 2. Entrenador (Visita) -->
+            <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 shadow-lg">
+                <div class="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3">
+                    <span class="text-xs sm:text-sm font-bold uppercase tracking-wider text-[#e8631c] whitespace-nowrap">
+                        Entrenador:
+                    </span>
+                    <input type="text" placeholder="Nombre del entrenador" 
+                           class="w-full bg-[#0b1426]/90 border border-[#e8631c]/60 focus:border-[#e8631c] rounded-lg px-3 py-1.5 text-sm text-white placeholder-gray-400 outline-none transition">
+                </div>
+            </div>
+
+            <!-- 3. Jugadores (Visita) -->
+            <div class="bg-[#111e38]/85 backdrop-blur-sm border-2 border-[#e8631c] rounded-xl p-3 sm:p-4 shadow-lg flex flex-col gap-3">
+                <div class="flex justify-between items-center border-b border-[#e8631c]/40 pb-2">
+                    <h2 class="text-sm sm:text-base font-extrabold uppercase tracking-wider text-[#e8631c]">
+                        Jugadores
+                    </h2>
+                    <div class="flex gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-bold text-gray-300 pr-1">
+                        <span title="En cancha / Titular">Titular</span>
+                        <span title="Habilitado">Hab.</span>
+                    </div>
+                </div>
+
+                <!-- Lista desplegada en móviles, con scroll interno desde tablets (md) -->
+                <div class="flex flex-col gap-2 md:max-h-[400px] md:overflow-y-auto pr-1">
+                    <!-- Fila Jugador 1 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Fila Jugador 2 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Fila Jugador 3 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Fila Jugador 4 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Fila Jugador 5 -->
+                    <div class="flex items-center gap-1.5 sm:gap-2 bg-[#0b1426]/80 border border-[#2e4374] hover:border-[#e8631c] rounded-lg p-1.5 sm:p-2 transition">
+                        <input type="text" placeholder="N°" class="w-10 sm:w-12 text-center bg-[#111e38] border border-[#e8631c]/50 rounded py-1 text-xs sm:text-sm font-bold text-white outline-none">
+                        <input type="text" placeholder="Nombre del jugador" class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
+                        <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                            <input type="checkbox" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:col-span-2 flex justify-center mt-2 sm:mt-4">
+           
+                <a href="./iniciar_partido.html"  class="bg-[#e8631c] hover:bg-[#ff7529] text-white font-extrabold uppercase tracking-wider px-8 py-3.5 rounded-xl border-2 border-white/20 shadow-lg shadow-[#e8631c]/30 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer text-sm sm:text-base">
+                Iniciar Partido
+                </a>
+        </div>
+
+
+    </div>
+
+</body>
+</html>
