@@ -93,3 +93,19 @@ Respuesta 1:
 </html>
 
 (Finalmente movi los botones a la izq y der de equipo local y visita, al igual que centre mas las cosas)
+# Problema de error de archivo cuenta para hacer el commit
+- **Fecha:** 2026-11-12
+- **Integrante:** Javier Urrutia (@javiurrutialara)
+- **Herramienta y modelo:** Geminis
+- **Enlace a la conversación:** 
+- **Archivos afectados:** Cuenta.js
+## Objetivo
+Arreglar el problema para poder correr los archivos en Linux se cambia por letras mayusculas.
+## Conversación (me sale este error del cuenta js a que se debe ?)
+### Respuesta 1
+El error fatal: pathspec 'Cuenta1.js' did not match any files en tu terminal ocurre por dos razones al mismo tiempo:   Falta la ruta de la carpeta src/: Estás ejecutando git add desde la raíz del proyecto (/workspaces/MUNDO-ARBITRAJE), pero Cuenta1.js no está en la raíz, sino dentro de la carpeta src/. Por eso Git no lo encuentra si escribes solo Cuenta1.js en vez de src/Cuenta1.js.   Error de tipeo en el comando anterior: Además, en la segunda línea escribiste Main,js (con coma en vez de punto) y Style.js (cuando tu archivo se llama Style.css).
+## Qué se incorporó al proyecto
+git add src/Cuenta1.js src/Main.js src/Principal.js src/Style.css Cuenta.html Index.html
+## Verificación
+- Funciono y me dejo hacer el commit 
+- Fue solo por no tener atencion con letras que ponia :(
