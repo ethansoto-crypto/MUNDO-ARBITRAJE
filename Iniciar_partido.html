@@ -9,7 +9,7 @@
 </head>
 <body class="bg-black min-h-screen flex items-center justify-center p-4">
 
-    <section x-data="{ faltasLocal: 0, faltasVisita: 0, puntosLocal: 0, puntosVisita: 0 }" class="w-full max-w-5xl h-[500px] bg-zinc-950 border-4 border-zinc-800 rounded-xl p-6 shadow-2xl flex flex-col justify-between items-center">
+    <section x-data="{ faltasLocal: 0, faltasVisita: 0, puntosLocal: 0, puntosVisita: 0, minutos: 12, segundos: 0, reloj: null }" class="w-full max-w-5xl h-[500px] bg-zinc-950 border-4 border-zinc-800 rounded-xl p-6 shadow-2xl flex flex-col justify-between items-center">
 
         <section class="w-full flex justify-between items-start">
     
@@ -43,12 +43,13 @@
 
         <div class="text-center flex flex-col items-center -mt-14">
             <div class="flex gap-3 mb-2">
-                <button type="button" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold cursor-pointer">Iniciar</button>
-                <button type="button" class="px-4 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm font-bold cursor-pointer">Detener</button>
-                <button type="button" class="px-4 py-1.5 rounded-lg bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-bold cursor-pointer">Reiniciar</button>
+                <button type="button" @click="if(!reloj) { reloj = setInterval(() => { if(segundos > 0) { segundos--; } else if(minutos > 0) { minutos--; segundos = 59; } else { clearInterval(reloj); reloj = null; } }, 1000); }" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold cursor-pointer">Iniciar</button>
+                <button type="button" @click="clearInterval(reloj); reloj = null;" class="px-4 py-1.5 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm font-bold cursor-pointer">Detener</button>
+                <button type="button" @click="clearInterval(reloj); reloj = null; minutos = 12; segundos = 0;" class="px-4 py-1.5 rounded-lg bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-bold cursor-pointer">Reiniciar</button>
             </div>
-            <p class="text-red-600 text-7xl md:text-8xl font-bold tracking-wider">24 : 00</p>
-        </div>
+           <p class="text-red-600 text-7xl md:text-8xl font-bold tracking-wider">
+                <span x-text="minutos < 10 ? '0' + minutos : minutos">12</span> : <span x-text="segundos < 10 ? '0' + segundos : segundos">00</span>
+            </p>
 
         <div class="w-full flex justify-center gap-8 items-center mb-10">
             <aside class="flex flex-col space-y-2">
