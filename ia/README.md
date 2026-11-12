@@ -109,3 +109,20 @@ git add src/Cuenta1.js src/Main.js src/Principal.js src/Style.css Cuenta.html In
 ## Verificación
 - Funciono y me dejo hacer el commit 
 - Fue solo por no tener atencion con letras que ponia :(
+
+12-11-2026
+Ethan Soto
+Gemini
+Iniciar_partido.html
+
+pront 1: La pagina de Jugadores.html me sale vacia y sin nada donde estara el error?.
+Respuesta: El problema está en las líneas 8 y 9 dentro del <head> de Jugadores.html.
+Qué hacer en Jugadores.html
+Borra esas dos etiquetas <script> del <head> (líneas 8 y 9).
+Pégalas al final, justo antes de cerrar </body> (en este orden exacto):
+HTML
+    <script type="module" src="./src/Jugadore.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+</html>
+Con ese cambio, Jugadore.js registra planillaEquipos primero y luego Alpine renderiza la tabla completa con ambos equipos y sus jugadores.
