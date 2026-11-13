@@ -44,3 +44,50 @@ export async function guardarPlanilla(datosPlanilla) {
   localStorage.setItem('planilla_partido', JSON.stringify(datosPlanilla));
   return { ok: true, status: 200, data: datosPlanilla };
 }
+
+const USUARIOS_DEFECTO = [
+  { id: 1, usuario: 'Javier_urrutia23', clave: '12345678', nombre: 'Javier Urrutia', rol: 'mc' },
+  { id: 2, usuario: 'Giovanny_Guerra4', clave: 'G1234567', nombre: 'Giovanny Guerra', rol: 'arbitro' },
+  { id: 3, usuario: 'Ethan_Soto8', clave: 'Ethan1234', nombre: 'Ethan Soto', rol: 'cronometrista' }
+];
+
+export async function registrarUsuario(nuevoUsuario) {
+  await esperar(400);
+  const guardados = JSON.parse(localStorage.getItem('usuarios_registrados') || '[]');
+  guardados.push(nuevoUsuario);
+  localStorage.setItem('usuarios_registrados', JSON.stringify(guardados));
+  localStorage.setItem('usuario_activo', JSON.stringify(nuevoUsuario));
+  localStorage.setItem('sesion_activa', JSON.stringify(nuevoUsuario));
+  return { ok: true, status: 201, data: nuevoUsuario };
+}
+
+export async function iniciarSesion(usuarioIngresado, claveIngresada) {
+  await esperar(LATENCIA);
+
+  let base = USUARIOS_DEFECTO;
+  try {
+    const res = await fetch('/mocks/Usuarios.json');
+    if (res.ok) base = await res.json();
+  } catch (e) {}
+
+  const registrados = JSON.parse(localStorage.getItem('usuarios_registrados') || '[]');
+  const todos = [...base, ...registrados];
+
+  const encontrado = todos.find(
+    (u) => u.usuario === usuarioIngresado && u.clave === claveIngresada
+  );
+
+  if (!encontrado) {
+    return { ok: false, status: 401, error: 'Usuario o contraseña incorrectos.' };
+  }
+
+  const sesion = {
+    usuario: encontrado.usuario,
+    nombre: encontrado.nombre || encontrado.usuario,
+    rol: encontrado.rol || 'oficial'
+  };
+
+  localStorage.setItem('usuario_activo', JSON.stringify(sesion));
+  localStorage.setItem('sesion_activa', JSON.stringify(sesion));
+  return { ok: true, status: 200, data: sesion };
+}

@@ -2,7 +2,7 @@ import { obtenerPlanilla, guardarPlanilla } from './Api.js';
 
 
 if (!localStorage.getItem('sesion_activa')) {
-  window.location.href = './Index.html';
+  window.location.href = './index.html';
 }
 
 const componentePlanilla = () => ({

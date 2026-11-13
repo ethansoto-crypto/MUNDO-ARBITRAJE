@@ -1,38 +1,41 @@
-const boton = document.querySelector('#boton_login')
-const formulario = document.querySelector('#formulario')
-const boton_entrar = document.querySelector('#boton_entrar')
-const boton_cuenta = document.querySelector('#boton_cuenta')
-const boton_contraseña = document.querySelector('#boton_contraseña')
-const recuperar_contraseña = document.querySelector('#correo_recuperacion')
-const boton_enviar = document.querySelector('#boton_enviar')
+import { iniciarSesion } from './Api.js';
 
-boton.addEventListener("click", () =>{
-    if(formulario.style.display == "none"){
-        formulario.style.display = "block";
-    }
-    else {
-        formulario.style.display = "none";
-    }
-})
+const botonLogin = document.querySelector('#boton_login');
+const formulario = document.querySelector('#formulario');
+const botonCuenta = document.querySelector('#boton_cuenta');
+const botonRecuperar = document.querySelector('#boton_contraseña');
+const inputCorreo = document.querySelector('#correo_recuperacion');
+const botonEnviar = document.querySelector('#boton_enviar');
 
-boton_entrar.addEventListener("click", (e)=>{
-  e.preventDefault()
-  window.location.href = './Principal.html'
-})
+botonLogin.addEventListener('click', () => {
+  formulario.style.display = formulario.style.display === 'none' ? 'block' : 'none';
+});
 
-boton_cuenta.addEventListener("click", (e)=>{
-    e.preventDefault()
-    window.location.href = './Cuenta.html'
-})
+botonCuenta.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.location.href = './Cuenta.html';
+});
 
-boton_contraseña.addEventListener("click", (e)=>{
-  e.preventDefault()
-  if(recuperar_contraseña.style.display == "none"){
-        recuperar_contraseña.style.display = "block";
-        boton_enviar.style.display= "block";
-    }
-    else {
-        recuperar_contraseña.style.display = "none";
-        boton_enviar.style.display= "none";
-    }
-})
+botonRecuperar.addEventListener('click', () => {
+  inputCorreo.style.display = 'inline-block';
+  botonEnviar.style.display = 'inline-block';
+});
+
+formulario.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const usuario = document.querySelector('#usuario').value.trim();
+  const clave = document.querySelector('#contraseña').value.trim();
+
+  if (!usuario || !clave) {
+    alert('Completa usuario y contraseña');
+    return;
+  }
+
+  const respuesta = await iniciarSesion(usuario, clave);
+  if (respuesta.ok) {
+    window.location.href = './Principal.html';
+  } else {
+    alert(respuesta.error);
+  }
+});
+
