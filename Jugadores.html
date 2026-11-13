@@ -17,7 +17,7 @@
         <p class="text-lg font-bold text-slate-200">Cargando Planilla ...</p>
     </div>
 
-    <div x-show="error && !cargando" class="my-auto max-w-md mx-auto bg-red-950/90 border-2 border-red-500 p-6 rounded-xl text-center space-y-4">
+     <div x-show="error && !cargando" class="my-auto max-w-md mx-auto bg-red-950/90 border-2 border-red-500 p-6 rounded-xl text-center space-y-4">
         <p class="text-red-200 font-semibold" x-text="error"></p>
         <button @click="cargarDatos(false)" type="button"
                 class="px-5 py-2 bg-[#e8631c] hover:bg-[#ff7529] rounded-lg font-bold text-white transition">
@@ -26,8 +26,7 @@
     </div>
 
     <div x-show="!cargando && !error" x-transition
-         class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-24 items-start my-auto">
-
+      class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 xl:gap-24 items-start my-auto">
         
         <div class="flex flex-col gap-3 sm:gap-4 w-full">
             

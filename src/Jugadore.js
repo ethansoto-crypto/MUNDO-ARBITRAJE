@@ -1,6 +1,6 @@
 import { obtenerPlanilla, guardarPlanilla } from './Api.js';
 
-// Proteger ruta privada (Criterio A5)
+
 if (!localStorage.getItem('sesion_activa')) {
   window.location.href = './Index.html';
 }
