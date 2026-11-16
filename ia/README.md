@@ -174,3 +174,43 @@ formulario.addEventListener('submit', async (e) => {
     alert(respuesta.error);
   }
 });
+--------------------------------------------------------------------------------------------------------
+# Problema de pagina con barra de deslizamiento 
+- **Fecha:** 2026-11-16
+- **Integrante:** Javier Urrutia (@javiurrutialara)
+- **Herramienta y modelo:** Geminis
+- **Enlace a la conversación:** 
+- **Archivos afectados:** Cuenta.js
+## Objetivo
+Arreglar el problema de la pagina cuando se navega por ella y dearrepente queda en blanco 
+## Conversación 
+(cuando muevo la barra de desplazamiento de mi pagina de arrepente sale un rectangulo blanco al fondo de la pantalla y desaparece despues y que el fondo de pantalla denuevo como si no hubiera pasado nada eso a que se debe ?)
+### Respuesta 1
+Ese parpadeo o rectángulo blanco al hacer scroll ocurre por la clase bg-fixed (background-attachment: fixed) combinada con bg-cover en la etiqueta <body>.
+
+Cuando usas bg-fixed con una imagen de fondo grande (MUNDO_ARBITRAL.jpg), el navegador —especialmente en celulares, tablets o pantallas de alta resolución— tiene que volver a pintar la imagen en cada cuadro del desplazamiento. Si la imagen es pesada o el scroll es rápido, el renderizado se retrasa unos milisegundos y deja ver el fondo blanco por defecto del navegador antes de volver a dibujarla.
+
+Cómo solucionarlo en tu <body>
+Quita bg-fixed (o déjalo solo para pantallas de PC con md:bg-fixed) para que el navegador no tenga que redibujar el fondo constantemente al mover la pantalla en celulares y tablets.
+
+Asegura el color base en <html>: Si en algún milisegundo ocurre un rebote de scroll (como el efecto elástico en iPhone/Android al llegar al borde), el color que asome será el azul oscuro (#111e38) de tu diseño y nunca un destello blanco.
+
+Aplica estos dos cambios en tu index.html (lo tachado ~~...~~ se quita, lo que está en negrita se agrega):
+
+En la etiqueta <html>:
+
+<html lang="en" class="bg-[#111e38]">
+
+En la etiqueta <body>:
+
+<body class="min-h-screen flex flex-col items-center bg-[#111e38] bg-[url('/MUNDO_ARBITRAL.jpg')] bg-cover bg-center bg-fixed md:bg-fixed bg-no-repeat text-white px-4">
+
+(Nota: Si el parpadeo blanco también te pasa en el computador, borra incluso el md:bg-fixed para que el fondo se desplace de forma fluida junto con la página sin parpadeos).
+## Qué se incorporó al proyecto
+<html lang="en" class="bg-[#111e38]">
+
+md:bg-fixed
+## Verificación
+- Funciono con la pagina principal y ahora en el telefono me no me sale ese rectangulo molesto cuando me muevo por la pagina
+- Tambien lo use para la pagina jugares.html y tambien funciono 
+  --------------------------------------------------------------------------------------------------------

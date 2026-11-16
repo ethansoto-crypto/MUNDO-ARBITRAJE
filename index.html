@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="bg-[#111e38]">
   <head>
     <link rel="stylesheet" href="./src/Style.css">
     <meta charset="UTF-8" />
@@ -10,25 +10,48 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <title>Mundo-Arbitraje</title>
   </head>
-  <body>
+  <body class="min-h-screen flex flex-col items-center bg-[#111e38] bg-[url('/MUNDO_ARBITRAL.jpg')] bg-cover bg-center md:bg-fixed bg-no-repeat text-white px-4">
 
-    <header class="">
-      <h1 class="text-2xl md:text-4xl font-black text-slate-100 ">
+    <header class="w-full text-center pt-6 pb-4">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-slate-100 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
         Proyecto Arbitros</h1>
     </header>
     
-    <button id="boton_login" type="button"> Login </button>
+    <div class="my-4">
+      <button id="boton_login" type="button"
+        class="bg-[#111e38] hover:bg-[#e8631c] text-white border-2 border-[#e8631c] rounded-full px-8 py-3 text-lg sm:text-xl font-[fantasy] uppercase tracking-wider shadow-[0_8px_16px_rgba(0,0,0,0.6)] transition duration-300 cursor-pointer">
+        Login
+      </button>
+    </div>
 
-    <form id="formulario" style="display:none">
-    <h1> Iniciar sesion</h1>
-    <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario"><br>
-    <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña"><br>
-    <button id="boton_entrar" type="submit">Entrar</button>
-    <button id="boton_cuenta" type="submit">Crear cuenta</button><br>
-    <button id="boton_contraseña" type="button"> Recuperar contraseña</button><br>
-    <input type="text" id="correo_recuperacion" name="correo" style="display:none" placeholder="Correo para recuperar contraseña">
-    <button id="boton_enviar" type="button" style="display:none"> Enviar correo</button>
-    </form>
+    <form id="formulario" style="display:none" class="w-full max-w-[420px] bg-gradient-to-br from-[#111e38] to-[#1c2d52] border-2 border-[#e8631c] rounded-2xl p-6 sm:p-8 text-center shadow-[0_10px_25px_rgba(0,0,0,0.7)] space-y-4">
+    <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2"> Iniciar sesion</h1>
+    <div class="space-y-3">
+     <input type="text" id="usuario" name="usuario" placeholder="Nombre de usuario"
+     class="w-full bg-white text-slate-900 border-2 border-[#e8631c] rounded-full px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-[#e8631c]">
+     <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña"
+     class="w-full bg-white text-slate-900 border-2 border-[#e8631c] rounded-full px-4 py-2.5 text-base focus:outline-none focus:ring-2 focus:ring-[#e8631c]">
+    </div>
+    
+    <div class="flex flex-col sm:flex-row gap-3 pt-2 w-full">
+      <button id="boton_entrar" type="submit" 
+      class=" w-full sm:flex-1 bg-[#111e38] hover:bg-[#e8631c] text-white border-2 border-[#e8631c] rounded-full py-2.5 px-3 text-xs sm:text-sm font-bold uppercase transition duration-300 cursor-pointer">Entrar</button>
+    <button id="boton_cuenta" type="submit" 
+    class="w-full sm:flex-1 bg-[#111e38] hover:bg-[#e8631c] text-white border-2 border-[#e8631c] rounded-full py-2.5 px-3 text-xs sm:text-sm font-bold uppercase transition duration-300 cursor-pointer">Crear cuenta</button>
+    </div>
+
+    <div class="pt-1 w-full">
+    <button id="boton_contraseña" type="button" 
+    class="w-full bg-[#111e38] hover:bg-[#e8631c] text-white border-2 border-[#e8631c] rounded-full py-2.5 px-3 text-xs sm:text-sm font-bold uppercase tracking-normal  whitespace-nowrap transition duration-300 cursor-pointer"> Recuperar contraseña</button>
+    </div>
+    
+    <div class="space-y-3 pt-2">
+    <input type="text" id="correo_recuperacion" name="correo" style="display:none" placeholder="Correo para recuperar contraseña"
+    class="w-full sm:w-4/5 mx-auto bg-white text-slate-900 border-2 border-[#e8631c] rounded-full px-4 py-2 text-base focus:outline-none">
+    <button id="boton_enviar" type="button" style="display:none" 
+    class="w-full sm:w-3/4 mx-auto bg-[#111e38] hover:bg-[#e8631c] text-white border-2 border-[#e8631c] rounded-full py-2.5 px-3 text-xs sm:text-sm font-bold uppercase transition duration-300 cursor-pointer"> Enviar correo</button>
+    </div>
+  </form>
     
     <script type="module" src="/src/Main.js"></script>
   </body>
