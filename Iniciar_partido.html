@@ -5,107 +5,229 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Partido</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script type="module" src="./src/Iniciar_partido.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-black min-h-screen flex items-center justify-center p-4">
+<body class="bg-black min-h-screen flex items-center justify-center p-2 sm:p-4 text-white"
+    x-data="tableroPartido">
 
-    <section x-data="{ faltasLocal: 0, faltasVisita: 0, puntosLocal: 0, puntosVisita: 0, minutos: 12, segundos: 0, reloj: null ,editando:false }"
-      class="w-full max-w-5xl min-h-[500px] md:h-[500px] bg-zinc-950 border-4 border-zinc-800 rounded-xl p-4 md:p-6 shadow-2xl flex flex-col justify-between items-center gap-6 md:gap-0">
-    
-      <section class="w-full flex justify-between items-start gap-2">
-        <aside class="flex flex-col items-center space-y-2">
-            <section class="bg-zinc-950 border-2 border-zinc-700 rounded-xl p-4 flex flex-col items-center space-y-2 shadow-2xl min-w-[130px] md:min-w-[160px]">
-                <p class="text-red-600 text-sm font-serif font-black uppercase tracking-wider">Faltas</p>
-                <p x-text="faltasLocal" class="text-amber-500 text-6xl md:text-5xl font-bold">0</p>
-            </section>
+    <div x-show="cargando" class="text-center">
+        <div class="inline-block w-10 h-10 border-4 border-[#e8631c] border-t-transparent rounded-full animate-spin mb-3"></div>
+        <p class="text-sm font-bold text-slate-300">Cargando equipos...</p>
+    </div>
 
-            <aside class="flex space-x-4">
-                <button type="button" @click="faltasLocal++" class="w-10 h-10 rounded-full border-2 border-zinc-400 text-zinc-300 font-bold text-xl cursor-pointer hover:bg-zinc-800 flex items-center justify-center">+</button>
-                <button type="button" @click="if(faltasLocal > 0) faltasLocal--" class="w-10 h-10 rounded-full border-2 border-zinc-400 text-zinc-300 font-bold text-xl cursor-pointer hover:bg-zinc-800 flex items-center justify-center">-</button>
-            </aside>
-        </aside>
+    <section x-show="!cargando" x-transition
+      class="w-full max-w-6xl bg-zinc-950 border-4 border-zinc-800 rounded-xl p-3 sm:p-5 shadow-2xl grid grid-cols-2 lg:grid-cols-12 gap-3 sm:gap-4 items-stretch">
 
-        <aside class="flex flex-col items-center space-y-2">
-            <section class="bg-zinc-950 border-2 border-zinc-700 rounded-xl p-4 flex flex-col items-center space-y-2 shadow-2xl min-w-[160px]">
-                <p class="text-red-600 text-sm font-serif font-black uppercase tracking-wider">Faltas</p>
-                <p x-text="faltasVisita" class="text-amber-500 text-6xl md:text-5xl font-bold">0</p>
-            </section>
-
-            <aside class="flex space-x-4">
-                <button type="button" @click="faltasVisita++" class="w-10 h-10 rounded-full border-2 border-zinc-400 text-zinc-300 font-bold text-xl cursor-pointer hover:bg-zinc-800 flex items-center justify-center">+</button>
-                <button type="button" @click="if(faltasVisita > 0) faltasVisita--" class="w-10 h-10 rounded-full border-2 border-zinc-400 text-zinc-300 font-bold text-xl cursor-pointer hover:bg-zinc-800 flex items-center justify-center">-</button>
-            </aside>
-        </aside>
-
-    </section>
-        
-        <div class="text-center flex flex-col items-center -mt-4 md:-mt-90">
-               <p @click="if(!editando) { if(reloj) { clearInterval(reloj); reloj = null; } else { reloj = setInterval(() => { if(segundos > 0) { segundos--; } else if(minutos > 0) { minutos--; segundos = 59; } else { clearInterval(reloj); reloj = null; } }, 1000); } }"
-               title="Haz clic para iniciar o pausar"
-               class="text-red-600 text-7xl md:text-8xl font-bold tracking-wider cursor-pointer select-none transition-opacity hover:opacity-80">
-                <span x-text="minutos < 10 ? '0' + minutos : minutos">12</span> : <span x-text="segundos < 10 ? '0' + segundos : segundos">00</span>
-            </p>
-
-            <div class="flex items-center gap-2 mt-2 h-9">
-             <template x-if="!editando">
-                    <div class="flex gap-2">
-                        <button type="button" 
-                                @click="clearInterval(reloj); reloj = null; editando = true;" 
-                                class="px-4 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-sm font-bold cursor-pointer">
-                            Edit
-                        </button>
-                        <button type="button" 
-                                @click="clearInterval(reloj); reloj = null; minutos = minutosIniciales; segundos = 0;" 
-                                class="px-4 py-1.5 rounded-lg bg-zinc-700 hover:bg-zinc-600 text-white text-sm font-bold cursor-pointer">
-                            Reiniciar
-                        </button>
-                    </div>
-                </template>
-
-                <template x-if="editando">
-                    <div class="flex items-center gap-2">
-                        <input type="number" 
-                               x-model.number="minutosIniciales" 
-                               min="1" 
-                               max="999"
-                               @keydown.enter="minutos = Math.max(1, minutosIniciales || 1); segundos = 0; editando = false;"
-                               class="w-20 px-2 py-1 rounded-lg bg-zinc-800 border border-zinc-600 text-white text-center text-sm font-bold focus:outline-none focus:border-amber-500">
-                        <button type="button" 
-                                @click="minutos = Math.max(1, minutosIniciales || 1); segundos = 0; editando = false;" 
-                                class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold cursor-pointer">
-                            OK
-                        </button>
-                    </div>
-                </template>
+        <div class="col-span-1 lg:col-span-3 order-2 lg:order-1 flex flex-col gap-2 sm:gap-3">
+            <div class="bg-zinc-900 border-2 border-zinc-700 rounded-xl p-2.5 sm:p-3 flex flex-col items-center">
+                <p class="text-red-600 text-xs font-black uppercase tracking-wider">Faltas</p>
+                <p x-text="faltasLocal" class="text-amber-500 text-3xl sm:text-4xl font-bold my-1">0</p>
+                <div class="flex gap-3">
+                    <button type="button" @click="faltasLocal++" class="w-8 h-8 rounded-full border border-zinc-400 text-zinc-200 font-bold hover:bg-zinc-800 flex items-center justify-center active:scale-95 cursor-pointer">+</button>
+                    <button type="button" @click="if(faltasLocal > 0) faltasLocal--" class="w-8 h-8 rounded-full border border-zinc-400 text-zinc-200 font-bold hover:bg-zinc-800 flex items-center justify-center active:scale-95 cursor-pointer">-</button>
+                </div>
             </div>
 
-            
-            
+            <div class="bg-zinc-900 border-2 border-[#e8631c] rounded-lg py-1.5 sm:py-2 px-2 text-center shadow">
+                <p x-text="nombreLocal" class="text-[#e8631c] font-extrabold uppercase tracking-wider text-xs sm:text-base truncate">LOCAL</p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-1.5 sm:gap-2 flex-1">
+                <template x-for="jugador in titularesLocal" :key="jugador.id">
+                    <button type="button" @click="seleccionarJugador(jugador, 'local')" :title="jugador.nombre"
+                        :class="jugadorSeleccionado?.id === jugador.id ? 'border-amber-500 bg-zinc-800' : 'border-zinc-700 bg-zinc-900'"
+                        class="border-2 hover:border-[#e8631c] rounded-lg py-1.5 sm:p-2 flex items-center justify-center shadow cursor-pointer transition">  
+                        <span x-text="jugador.numero || '00'" class="text-xl sm:text-3xl font-black text-zinc-100">00</span>
+                    </button>
+                </template>
+            </div>
+        </div>   
+
+        <div class="col-span-2 lg:col-span-6 order-1 lg:order-2 flex flex-col justify-between items-center gap-3 sm:gap-4 py-1">
+            <div class="w-full flex justify-between items-start gap-1.5 sm:gap-2">
+                <div class="flex flex-col items-center gap-1 sm:gap-1.5 flex-1">
+                    <span x-text="nombreLocal" class="text-[11px] sm:text-xs font-bold uppercase text-zinc-400 tracking-wider max-w-[95px] sm:max-w-[125px] truncate">LOCAL</span>
+                    <div class="bg-zinc-900 border-2 border-zinc-700 rounded-xl p-2 sm:p-3 w-full max-w-[135px] flex flex-col items-center">
+                        <p class="text-zinc-400 text-[10px] sm:text-[11px] font-semibold uppercase">Puntos</p>
+                        <p x-text="puntosLocal" class="text-amber-500 text-4xl sm:text-5xl font-bold">0</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" @click="puntosLocal++" class="w-8 h-8 rounded-full border border-zinc-400 text-zinc-200 font-bold hover:bg-zinc-800 flex items-center justify-center active:scale-95 cursor-pointer">+</button>
+                        <button type="button" @click="if(puntosLocal > 0) puntosLocal--" class="w-8 h-8 rounded-full border border-zinc-400 text-zinc-200 font-bold hover:bg-zinc-800 flex items-center justify-center active:scale-95 cursor-pointer">-</button>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col items-center gap-2 shrink-0">
+                    <button type="button" @click="terminarPartido()" class="px-2.5 sm:px-3 py-1.5 rounded-lg bg-red-700 hover:bg-red-600 text-white text-[10px] sm:text-xs font-extrabold uppercase tracking-wider cursor-pointer shadow text-center">
+                        Terminar Partido
+                    </button>
+                    
+                    <div class="flex items-center gap-1.5 sm:gap-2 mt-1">
+                        <template x-if="!editando">
+                            <div class="flex gap-1.5 sm:gap-2">
+                                <button type="button" @click="abrirEdicionReloj()" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-amber-600 hover:bg-amber-500 text-white text-[10px] sm:text-xs font-bold cursor-pointer shadow">
+                                    EDIT
+                                </button>
+                                <button type="button" @click="reiniciarReloj()" class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-zinc-700 hover:bg-zinc-600 text-white text-[10px] sm:text-xs font-bold cursor-pointer shadow">
+                                    CONFI
+                                </button>
+                            </div>
+                        </template>
+
+                        <template x-if="editando">
+                            <div class="flex items-center gap-1">
+                                <input type="number" x-model.number="minutosIniciales" min="1" max="999"
+                                       @keydown.enter="guardarTiempoReloj()"
+                                       class="w-14 sm:w-16 px-1.5 py-1 rounded bg-zinc-800 border border-zinc-600 text-white text-center text-xs sm:text-sm font-bold">
+                                <button type="button" @click="guardarTiempoReloj()" class="px-2 py-1 rounded bg-emerald-600 text-white text-xs font-bold cursor-pointer">
+                                    OK
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center gap-1 sm:gap-1.5 flex-1">
+                    <span x-text="nombreVisita" class="text-[11px] sm:text-xs font-bold uppercase text-zinc-400 tracking-wider max-w-[95px] sm:max-w-[125px] truncate">VISITA</span>
+                    <div class="bg-zinc-900 border-2 border-zinc-700 rounded-xl p-2 sm:p-3 w-full max-w-[135px] flex flex-col items-center">
+                        <p class="text-zinc-400 text-[10px] sm:text-[11px] font-semibold uppercase">Puntos</p>
+                        <p x-text="puntosVisita" class="text-amber-500 text-4xl sm:text-5xl font-bold">0</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" @click="puntosVisita++" class="w-8 h-8 rounded-full border border-zinc-400 text-zinc-200 font-bold hover:bg-zinc-800 flex items-center justify-center active:scale-95 cursor-pointer">+</button>
+                        <button type="button" @click="if(puntosVisita > 0) puntosVisita--" class="w-8 h-8 rounded-full border border-zinc-400 text-zinc-200 font-bold hover:bg-zinc-800 flex items-center justify-center active:scale-95 cursor-pointer">-</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-zinc-900/70 border-2 border-zinc-800 rounded-2xl px-5 sm:px-6 py-2.5 sm:py-3 text-center">
+                <p @click="alternarReloj()"
+                   title="Haz clic para iniciar o pausar"
+                   class="text-red-600 text-5xl sm:text-7xl font-bold tracking-wider cursor-pointer select-none hover:opacity-85">
+                    <span x-text="minutosFormateados">12</span>:<span x-text="segundosFormateados">00</span>
+                </p>
+            </div>
+
+            <div x-show="jugadorSeleccionado" x-transition
+                 class="w-full max-w-md bg-zinc-900 border-2 border-[#e8631c] rounded-xl p-3 shadow-xl space-y-2.5">
+                
+                <div class="flex justify-between items-center border-b border-zinc-700 pb-1.5">
+                    <p class="text-xs sm:text-sm font-bold text-zinc-200">
+                        <span class="px-2 py-0.5 rounded bg-[#e8631c] text-white uppercase text-[10px] mr-1.5"
+                              x-text="jugadorSeleccionado?.bando === 'local' ? nombreLocal : nombreVisita"></span>
+                        #<span x-text="jugadorSeleccionado?.numero"></span>
+                        <span class="text-amber-400" x-text="jugadorSeleccionado?.nombre"></span>
+                    </p>
+                    <button type="button" @click="jugadorSeleccionado = null" class="text-zinc-400 hover:text-white font-bold text-sm px-1.5 cursor-pointer">✕</button>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2">
+                    <button type="button" @click="sumarPuntosJugador(1)"
+                            class="bg-zinc-100 hover:bg-white text-black font-extrabold py-2.5 px-2 rounded-lg text-xs sm:text-sm cursor-pointer active:scale-95 transition shadow">
+                        Tiros libres
+                    </button>
+                    <button type="button" @click="sumarPuntosJugador(2)"
+                            class="bg-zinc-100 hover:bg-white text-black font-black py-2.5 px-2 rounded-lg text-lg sm:text-xl cursor-pointer active:scale-95 transition shadow">
+                        2
+                    </button>
+                    <button type="button" @click="sumarPuntosJugador(3)"
+                            class="bg-zinc-100 hover:bg-white text-black font-black py-2.5 px-2 rounded-lg text-lg sm:text-xl cursor-pointer active:scale-95 transition shadow">
+                        3
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" @click="menuOtrasFaltas = !menuOtrasFaltas"
+                            :class="menuOtrasFaltas ? 'bg-amber-500 text-black' : 'bg-zinc-100 hover:bg-white text-black'"
+                            class="font-extrabold py-2.5 px-2 rounded-lg text-xs sm:text-sm uppercase cursor-pointer active:scale-95 transition shadow">
+                        OTRAS FALTAS
+                    </button>
+                    <button type="button" @click="sumarFaltaJugador('Personal')"
+                            class="bg-zinc-100 hover:bg-red-600 hover:text-white text-black font-extrabold py-2.5 px-2 rounded-lg text-xs sm:text-sm uppercase cursor-pointer active:scale-95 transition shadow">
+                        FALTA
+                    </button>
+                </div>
+
+                <div x-show="menuOtrasFaltas" x-transition class="grid grid-cols-3 gap-1.5 pt-1">
+                    <button type="button" @click="sumarFaltaJugador('Técnica')"
+                            class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-1.5 rounded text-xs cursor-pointer">
+                        Técnica (T)
+                    </button>
+                    <button type="button" @click="sumarFaltaJugador('Antideportiva')"
+                            class="bg-orange-600 hover:bg-orange-500 text-white font-bold py-1.5 rounded text-xs cursor-pointer">
+                        Antidep. (U)
+                    </button>
+                    <button type="button" @click="sumarFaltaJugador('Descalificante')"
+                            class="bg-red-700 hover:bg-red-600 text-white font-bold py-1.5 rounded text-xs cursor-pointer">
+                        Descalif. (D)
+                    </button>
+                </div>
+            </div>
+
+            <p class="text-xs sm:text-sm text-zinc-400 font-medium h-5 text-center">
+                <span x-show="jugadorSeleccionado">
+                    Jugador: <strong class="text-amber-400" x-text="'#' + jugadorSeleccionado?.numero + ' ' + jugadorSeleccionado?.nombre"></strong>
+                </span>
+                <span x-show="!jugadorSeleccionado">Selecciona un jugador de los costados</span>
+            </p>
+
+            <!-- Periodo y Posesión -->
+            <div class="flex flex-row sm:flex-col items-center gap-3">
+                <div class="flex flex-col items-center">
+                    <span class="text-[11px] sm:text-xs uppercase text-zinc-400 font-bold mb-1">Periodo</span>
+                    <div @click="cambiarPeriodo()" title="Clic para cambiar periodo"
+                         class="bg-zinc-900 border-2 border-zinc-700 rounded-lg px-4 sm:px-5 py-1.5 cursor-pointer hover:border-amber-500">
+                        <span x-text="'0' + periodo" class="text-amber-500 text-xl sm:text-2xl font-bold">01</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button type="button" @click="posesion = 14" :class="posesion === 14 ? 'border-red-500 bg-zinc-800' : 'border-zinc-700 bg-zinc-900'" class="border-2 rounded-lg px-4 sm:px-5 py-1.5 sm:py-2 text-xl sm:text-2xl font-bold text-red-500 cursor-pointer">
+                        14
+                    </button>
+                    <button type="button" @click="posesion = 24" :class="posesion === 24 ? 'border-red-500 bg-zinc-800' : 'border-zinc-700 bg-zinc-900'" class="border-2 rounded-lg px-4 sm:px-5 py-1.5 sm:py-2 text-xl sm:text-2xl font-bold text-red-500 cursor-pointer">
+                        24
+                    </button>
+                </div>
+            </div>
         </div>
 
-        
+        <!-- ========================================================== -->
+        <!-- COLUMNA DERECHA (VISITA)                                   -->
+        <!-- ========================================================== -->
+        <div class="col-span-1 lg:col-span-3 order-3 flex flex-col gap-2 sm:gap-3">
+            <!-- Faltas Visita -->
+            <div class="bg-zinc-900 border-2 border-zinc-700 rounded-xl p-2.5 sm:p-3 flex flex-col items-center">
+                <p class="text-red-600 text-xs font-black uppercase tracking-wider">Faltas</p>
+                <p x-text="faltasVisita" class="text-amber-500 text-3xl sm:text-4xl font-bold my-1">0</p>
+                <div class="flex gap-3">
+                    <button type="button" @click="faltasVisita++" class="w-8 h-8 rounded-full border border-zinc-400 text-zinc-200 font-bold hover:bg-zinc-800 flex items-center justify-center active:scale-95 cursor-pointer">+</button>
+                    <button type="button" @click="if(faltasVisita > 0) faltasVisita--" class="w-8 h-8 rounded-full border border-zinc-400 text-zinc-200 font-bold hover:bg-zinc-800 flex items-center justify-center active:scale-95 cursor-pointer">-</button>
+                </div>
+            </div>
 
-        <div class="w-full flex justify-center gap-8 items-center mb-2 md:mb-10">
-            <aside class="flex flex-col space-y-2">
-                <button type="button" @click="puntosLocal++" class="w-10 h-10 rounded-full border-2 border-zinc-400 text-zinc-300 font-bold text-xl cursor-pointer hover:bg-zinc-800 flex items-center justify-center">+</button>
-                <button type="button" @click="if(puntosLocal > 0) puntosLocal--" class="w-10 h-10 rounded-full border-2 border-zinc-400 text-zinc-300 font-bold text-xl cursor-pointer hover:bg-zinc-800 flex items-center justify-center">-</button>
-            </aside>
-            
-            <section class="bg-zinc-950 border-2 border-zinc-700 rounded-xl p-4 flex flex-col items-center space-y-2 shadow-2xl min-w-[160px]">
-                <p class="text-zinc-300 text-sm font-semibold uppercase tracking-wider">Equipo local</p>
-                <p x-text="puntosLocal" class="text-amber-500 text-6xl md:text-5xl font-bold">0</p>
-            </section>
-            <section class="bg-zinc-950 border-2 border-zinc-700 rounded-xl p-4 flex flex-col items-center space-y-2 shadow-2xl min-w-[160px]">
-                <p class="text-zinc-300 text-sm font-semibold uppercase tracking-wider">Equipo visita</p>
-                <p x-text="puntosVisita" class="text-amber-500 text-6xl md:text-5xl font-bold">0</p>
-            </section>
-                <aside class="flex flex-col space-y-2">
-                <button type="button" @click="puntosVisita++" class="w-10 h-10 rounded-full border-2 border-zinc-400 text-zinc-300 font-bold text-xl cursor-pointer hover:bg-zinc-800 flex items-center justify-center">+</button>
-                <button type="button" @click="if(puntosVisita > 0) puntosVisita--" class="w-10 h-10 rounded-full border-2 border-zinc-400 text-zinc-300 font-bold text-xl cursor-pointer hover:bg-zinc-800 flex items-center justify-center">-</button>
-                </aside>
+            <!-- Nombre Visita -->
+            <div class="bg-zinc-900 border-2 border-[#e8631c] rounded-lg py-1.5 sm:py-2 px-2 text-center shadow">
+                <p x-text="nombreVisita" class="text-[#e8631c] font-extrabold uppercase tracking-wider text-xs sm:text-base truncate">VISITA</p>
+            </div>
+
+            <!-- 5 Jugadores Visita -->
+            <div class="grid grid-cols-1 gap-1.5 sm:gap-2 flex-1">
+                <template x-for="jugador in titularesVisita" :key="jugador.id">
+                    <button type="button"
+                            @click="seleccionarJugador(jugador, 'visita')"
+                            :title="jugador.nombre"
+                            :class="jugadorSeleccionado?.id === jugador.id ? 'border-amber-500 bg-zinc-800' : 'border-zinc-700 bg-zinc-900'"
+                            class="border-2 hover:border-[#e8631c] rounded-lg py-1.5 sm:p-2 flex items-center justify-center shadow cursor-pointer transition">
+                        <span x-text="jugador.numero || '00'" class="text-xl sm:text-3xl font-black text-zinc-100">00</span>
+                    </button>
+                </template>
+            </div>
         </div>
 
     </section>
 
+    
 </body>
 </html>
