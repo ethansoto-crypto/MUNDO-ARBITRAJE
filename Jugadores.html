@@ -56,6 +56,7 @@
                         Jugadores (<span x-text="local.jugadores.length"></span>)
                     </h2>
                     <div class="flex gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-bold text-gray-300 pr-6">
+                        <span title="Capitan del Equipo">Cap.</span>
                         <span title="En cancha / Titular">Titular</span>
                         <span title="Habilitado">Hab.</span>
                     </div>
@@ -70,6 +71,8 @@
                             <input type="text" x-model="jugador.nombre" placeholder="Nombre del jugador" aria-label="Nombre del jugador"
                                    class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
                             <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                                <input type="radio" name="capitan-local" :checked="jugador.capitan" @change="seleccionarCapitan('local', jugador.id)" aria-label="Capitán"
+                                    class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] cursor-pointer">
                                 <input type="checkbox" x-model="jugador.titular" aria-label="Titular" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
                                 <input type="checkbox" x-model="jugador.habilitado" aria-label="Habilitado" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
                                 <button @click="eliminarJugador('local', jugador.id)" type="button" title="Eliminar jugador"
@@ -122,6 +125,7 @@
                         Jugadores (<span x-text="visita.jugadores.length"></span>)
                     </h2>
                     <div class="flex gap-2.5 sm:gap-3 text-[11px] sm:text-xs font-bold text-gray-300 pr-6">
+                        <span title="Capitan del Equipo">Cap.</span>
                         <span title="En cancha / Titular">Titular</span>
                         <span title="Habilitado">Hab.</span>
                     </div>
@@ -136,6 +140,8 @@
                             <input type="text" x-model="jugador.nombre" placeholder="Nombre del jugador" aria-label="Nombre del jugador"
                                    class="flex-1 min-w-0 bg-transparent px-1.5 sm:px-2 py-1 text-xs sm:text-sm text-white placeholder-gray-500 outline-none">
                             <div class="flex items-center gap-2.5 sm:gap-3 px-1 shrink-0">
+                                <input type="radio" name="capitan-visita" :checked="jugador.capitan" @change="seleccionarCapitan('visita', jugador.id)" aria-label="Capitán"
+                                    class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] cursor-pointer">
                                 <input type="checkbox" x-model="jugador.titular" aria-label="Titular" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
                                 <input type="checkbox" x-model="jugador.habilitado" aria-label="Habilitado" class="w-4 h-4 sm:w-5 sm:h-5 accent-[#e8631c] rounded cursor-pointer">
                                 <button @click="eliminarJugador('visita', jugador.id)" type="button" title="Eliminar jugador"

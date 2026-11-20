@@ -18,7 +18,11 @@ const componenteTablero = () => ({
   puntosLocal: 0,
   puntosVisita: 0,
   periodo: 1,
+
+  posesionCorta: 14,
+  posesionLarga: 24,
   posesion: 24,
+  relojPosesion: null,
 
   minutos: 12,
   minutosIniciales: 12,
@@ -107,7 +111,7 @@ const componenteTablero = () => ({
       if (jug) jug.puntos = (jug.puntos || 0) + cantidad;
     }
 
-    // Cierra el panel tras registrar la jugada
+    
     this.jugadorSeleccionado = null;
     this.menuOtrasFaltas = false;
   },
@@ -127,7 +131,6 @@ const componenteTablero = () => ({
       if (jug) jug.faltas = (jug.faltas || 0) + 1;
     }
 
-    // Cierra el panel tras registrar la falta
     this.jugadorSeleccionado = null;
     this.menuOtrasFaltas = false;
   },
@@ -138,7 +141,9 @@ const componenteTablero = () => ({
     if (this.reloj) {
       clearInterval(this.reloj);
       this.reloj = null;
+      this.pausarPosesion();
     } else {
+      this.iniciarPosesion();
       this.reloj = setInterval(() => {
         if (this.segundos > 0) {
           this.segundos--;
@@ -148,28 +153,70 @@ const componenteTablero = () => ({
         } else {
           clearInterval(this.reloj);
           this.reloj = null;
+          this.pausarPosesion();
         }
       }, 1000);
     }
   },
+ 
+  iniciarPosesion() {
+    if (this.relojPosesion || this.posesion <= 0) return;
+
+    this.relojPosesion = setInterval(() => {
+      if (this.posesion > 0) {
+        this.posesion--;
+      } else {
+        this.pausarPosesion();
+      }
+    }, 1000);
+  },
+
+  pausarPosesion() {
+    clearInterval(this.relojPosesion);
+    this.relojPosesion = null;
+  },
+
+  alternarPosesion() {
+    if (this.editando) return;
+    if (this.relojPosesion) {
+      this.pausarPosesion();
+    } else {
+      this.iniciarPosesion();
+    }
+  },
+
+  reiniciarPosesion(segundos) {
+    this.posesion = segundos;
+    if (this.reloj && !this.relojPosesion) {
+      this.iniciarPosesion();
+    }
+  },
+  
 
   abrirEdicionReloj() {
     clearInterval(this.reloj);
     this.reloj = null;
+    this.pausarPosesion();
     this.editando = true;
   },
 
   guardarTiempoReloj() {
     this.minutos = Math.max(1, this.minutosIniciales || 1);
     this.segundos = 0;
+
+    this.posesionCorta = Math.max(1, this.posesionCorta || 14);
+    this.posesionLarga = Math.max(1, this.posesionLarga || 24);
+    this.posesion = this.posesionLarga;
     this.editando = false;
   },
 
   reiniciarReloj() {
     clearInterval(this.reloj);
     this.reloj = null;
+    this.pausarPosesion();
     this.minutos = this.minutosIniciales;
     this.segundos = 0;
+    this.posesion = this.posesionLarga;
   },
 
   cambiarPeriodo() {
@@ -179,6 +226,7 @@ const componenteTablero = () => ({
   terminarPartido() {
     if (confirm('¿Seguro que deseas terminar el partido?')) {
       clearInterval(this.reloj);
+      this.pausarPosesion();
       window.history.back();
     }
   }

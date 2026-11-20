@@ -76,11 +76,26 @@
                         </template>
 
                         <template x-if="editando">
-                            <div class="flex items-center gap-1">
-                                <input type="number" x-model.number="minutosIniciales" min="1" max="999"
-                                       @keydown.enter="guardarTiempoReloj()"
-                                       class="w-14 sm:w-16 px-1.5 py-1 rounded bg-zinc-800 border border-zinc-600 text-white text-center text-xs sm:text-sm font-bold">
-                                <button type="button" @click="guardarTiempoReloj()" class="px-2 py-1 rounded bg-emerald-600 text-white text-xs font-bold cursor-pointer">
+                            <div class="flex flex-wrap items-center justify-center gap-1 sm:gap-1.5 bg-zinc-900 border border-zinc-700 p-1 sm:p-1.5 rounded-lg max-w-[140px] sm:max-w-none">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[9px] text-zinc-400 uppercase font-bold">Min</span>
+                                    <input type="number" x-model.number="minutosIniciales" min="1" max="999"
+                                        @keydown.enter="guardarTiempoReloj()"
+                                        class="w-10 sm:w-12 px-0.5 sm:px-1 py-1 rounded bg-zinc-800 border border-zinc-600 text-white text-center text-[11px] sm:text-xs font-bold">
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[9px] text-zinc-400 uppercase font-bold">Pos 1</span>
+                                    <input type="number" x-model.number="posesionCorta" min="1" max="99"
+                                        @keydown.enter="guardarTiempoReloj()"
+                                        class="w-10 sm:w-11 px-0.5 sm:px-1 py-1 rounded bg-zinc-800 border border-zinc-600 text-amber-400 text-center text-[11px] sm:text-xs font-bold">
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[9px] text-zinc-400 uppercase font-bold">Pos 2</span>
+                                    <input type="number" x-model.number="posesionLarga" min="1" max="99"
+                                        @keydown.enter="guardarTiempoReloj()"
+                                        class="w-10 sm:w-11 px-0.5 sm:px-1 py-1 rounded bg-zinc-800 border border-zinc-600 text-amber-400 text-center text-[11px] sm:text-xs font-bold">
+                                </div>
+                                <button type="button" @click="guardarTiempoReloj()" class="w-full sm:w-auto px-2 py-1 sm:mt-3 rounded bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] sm:text-xs font-bold cursor-pointer">
                                     OK
                                 </button>
                             </div>
@@ -171,33 +186,49 @@
                 </span>
                 <span x-show="!jugadorSeleccionado">Selecciona un jugador de los costados</span>
             </p>
+            
+                <div class="flex flex-wrap justify-center items-center gap-4 sm:gap-6">
+                    
+                    <div class="flex flex-col items-center">
+                        <span class="text-[11px] sm:text-xs uppercase text-zinc-400 font-bold mb-1">Periodo</span>
+                        <div @click="cambiarPeriodo()" title="Clic para cambiar periodo"
+                            class="bg-zinc-900 border-2 border-zinc-700 rounded-lg px-4 sm:px-5 py-1.5 cursor-pointer hover:border-amber-500">
+                            <span x-text="'0' + periodo" class="text-amber-500 text-xl sm:text-2xl font-bold">01</span>
+                        </div>
+                    </div>
 
-            <!-- Periodo y Posesión -->
-            <div class="flex flex-row sm:flex-col items-center gap-3">
-                <div class="flex flex-col items-center">
-                    <span class="text-[11px] sm:text-xs uppercase text-zinc-400 font-bold mb-1">Periodo</span>
-                    <div @click="cambiarPeriodo()" title="Clic para cambiar periodo"
-                         class="bg-zinc-900 border-2 border-zinc-700 rounded-lg px-4 sm:px-5 py-1.5 cursor-pointer hover:border-amber-500">
-                        <span x-text="'0' + periodo" class="text-amber-500 text-xl sm:text-2xl font-bold">01</span>
+                    <div class="flex flex-col items-center">
+                        <span class="text-[11px] sm:text-xs uppercase text-zinc-400 font-bold mb-1">Posesión</span>
+                        <div class="flex items-center gap-2">
+                        
+                            <div @click="alternarPosesion()" title="Clic para pausar/reanudar posesión"
+                                :class="posesion <= 5 && posesion > 0 ? 'border-red-500 animate-pulse' : 'border-zinc-700'"
+                                class="bg-zinc-900 border-2 rounded-lg px-4 py-1.5 min-w-[70px] text-center cursor-pointer select-none">
+                                <span x-text="String(posesion).padStart(2, '0')"
+                                    :class="posesion === 0 ? 'text-red-600' : 'text-amber-500'"
+                                    class="text-2xl sm:text-3xl font-black">24</span>
+                            </div>
+
+                            <button type="button" @click="reiniciarPosesion(posesionCorta)"
+                                    :class="posesion === posesionCorta ? 'border-red-500 bg-zinc-800' : 'border-zinc-700 bg-zinc-900'"
+                                    class="border-2 hover:border-red-500 rounded-lg px-3.5 sm:px-4 py-1.5 sm:py-2 text-lg sm:text-xl font-bold text-red-500 cursor-pointer active:scale-95 transition">
+                                <span x-text="posesionCorta">14</span>
+                            </button>
+
+                            <button type="button" @click="reiniciarPosesion(posesionLarga)"
+                                    :class="posesion === posesionLarga ? 'border-red-500 bg-zinc-800' : 'border-zinc-700 bg-zinc-900'"
+                                    class="border-2 hover:border-red-500 rounded-lg px-3.5 sm:px-4 py-1.5 sm:py-2 text-lg sm:text-xl font-bold text-red-500 cursor-pointer active:scale-95 transition">
+                                <span x-text="posesionLarga">24</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="flex items-center gap-2">
-                    <button type="button" @click="posesion = 14" :class="posesion === 14 ? 'border-red-500 bg-zinc-800' : 'border-zinc-700 bg-zinc-900'" class="border-2 rounded-lg px-4 sm:px-5 py-1.5 sm:py-2 text-xl sm:text-2xl font-bold text-red-500 cursor-pointer">
-                        14
-                    </button>
-                    <button type="button" @click="posesion = 24" :class="posesion === 24 ? 'border-red-500 bg-zinc-800' : 'border-zinc-700 bg-zinc-900'" class="border-2 rounded-lg px-4 sm:px-5 py-1.5 sm:py-2 text-xl sm:text-2xl font-bold text-red-500 cursor-pointer">
-                        24
-                    </button>
-                </div>
             </div>
-        </div>
+           
 
-        <!-- ========================================================== -->
-        <!-- COLUMNA DERECHA (VISITA)                                   -->
-        <!-- ========================================================== -->
+       
         <div class="col-span-1 lg:col-span-3 order-3 flex flex-col gap-2 sm:gap-3">
-            <!-- Faltas Visita -->
+            
             <div class="bg-zinc-900 border-2 border-zinc-700 rounded-xl p-2.5 sm:p-3 flex flex-col items-center">
                 <p class="text-red-600 text-xs font-black uppercase tracking-wider">Faltas</p>
                 <p x-text="faltasVisita" class="text-amber-500 text-3xl sm:text-4xl font-bold my-1">0</p>
@@ -207,12 +238,11 @@
                 </div>
             </div>
 
-            <!-- Nombre Visita -->
+            
             <div class="bg-zinc-900 border-2 border-[#e8631c] rounded-lg py-1.5 sm:py-2 px-2 text-center shadow">
                 <p x-text="nombreVisita" class="text-[#e8631c] font-extrabold uppercase tracking-wider text-xs sm:text-base truncate">VISITA</p>
             </div>
 
-            <!-- 5 Jugadores Visita -->
             <div class="grid grid-cols-1 gap-1.5 sm:gap-2 flex-1">
                 <template x-for="jugador in titularesVisita" :key="jugador.id">
                     <button type="button"

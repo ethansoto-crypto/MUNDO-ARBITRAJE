@@ -42,11 +42,18 @@ const componentePlanilla = () => ({
       equipo: bando,
       numero: '',
       nombre: '',
+      capitan: false,
       titular: false,
       habilitado: true
     });
   },
 
+  seleccionarCapitan(bando,id){
+    this[bando].jugadores.forEach((j) => {
+      j.capitan = j.id === id;
+    });
+  },
+  
   eliminarJugador(bando, id) {
     if (confirm('¿Seguro que deseas quitar este jugador de la planilla?')) {
       this[bando].jugadores = this[bando].jugadores.filter((j) => j.id !== id);
